@@ -143,6 +143,7 @@ footer {
 
 .cart-button,
 .profile-button {
+    color: white;
     background: none;
     border: none;
     cursor: pointer;
@@ -281,4 +282,91 @@ footer {
     .product p {
         font-size: 0.875rem; /* About 14px */
     }
+}
+
+
+/* Previous styles... */
+
+/* Style for the cart page */
+.cart-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.cart-items {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    margin: 2rem 0;
+}
+
+.cart-item {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    text-align: center;
+}
+
+.cart-item img {
+    max-width: 100px;
+    margin-bottom: 1rem;
+}
+
+.cart-summary {
+    text-align: right;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 48rem) { /* Adjust as needed */
+    .cart-item img {
+        max-width: 80px;
+    }
+}
+
+/* ... (previous styles) ... */
+
+/* Style for the contact page */
+.contact-page {
+    padding: 2rem;
+    text-align: center;
+}
+
+.contact-page h2 {
+    margin-bottom: 1rem;
+}
+
+#contactForm {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#contactForm label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+#contactForm input[type="text"],
+#contactForm input[type="email"],
+#contactForm textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#contactForm button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#contactForm button:hover {
+    background-color: #555;
 }

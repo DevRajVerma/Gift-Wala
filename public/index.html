@@ -15,12 +15,20 @@
 
         <div class="top-header">
             <div class="logo-name">
-                <img src="logo.png" alt="Gift Shop Logo">
+                <a href="index.html">
+                    <img src="logo.png" alt="Gift Shop Logo">
+                </a>
+
+
                 <p>Gift Wala</p>
+
             </div>
             <div class="top-icons">
-                <button class="cart-button">Cart</button>
-                <button class="profile-button">Profile</button>
+
+                <a href="cart.html"><button class="cart-button">Cart</button></a>
+
+                <a href="profile.html"><button class="profile-button">Profile</button></a>
+
             </div>
         </div>
 
@@ -29,11 +37,11 @@
         <div class="bottom-header">
             <div class="menu-dropdown">
                 <button class="menu-button">Menu</button>
-                
+
                 <div class="dropdown-content">
-                    <a href="#">Home</a>
+                    <a href="index.html">Home</a>
                     <a href="#">Products</a>
-                    <a href="#">Contact</a>
+                    <a href="contact.html">Contact</a>
                 </div>
             </div>
             <div class="search-bar">
@@ -43,34 +51,8 @@
     </header>
 
     <main>
-        <section class="product">
-            <img src="product1.jpg" alt="Gift 1">
-            <h2>Gift 1</h2>
-            <p>Price: $19.99</p>
-            <button>Add to Cart</button>
-        </section>
-
-        <section class="product">
-            <img src="product2.jpg" alt="Gift 2">
-            <h2>Gift 2</h2>
-            <p>Price: $24.99</p>
-            <button>Add to Cart</button>
-        </section>
 
 
-        <section class="product">
-            <img src="product1.jpg" alt="Gift 1">
-            <h2>Gift 1</h2>
-            <p>Price: $19.99</p>
-            <button>Add to Cart</button>
-        </section>
-
-        <section class="product">
-            <img src="product2.jpg" alt="Gift 2">
-            <h2>Gift 2</h2>
-            <p>Price: $24.99</p>
-            <button>Add to Cart</button>
-        </section>
 
         <section class="product">
             <img src="product1.jpg" alt="Gift 1">
@@ -115,6 +97,35 @@
             <button>Add to Cart</button>
         </section>
 
+
+        <section class="product">
+            <img src="product1.jpg" alt="Gift 1">
+            <h2>Gift 1</h2>
+            <p>Price: $19.99</p>
+            <button>Add to Cart</button>
+        </section>
+
+        <section class="product">
+            <img src="product2.jpg" alt="Gift 2">
+            <h2>Gift 2</h2>
+            <p>Price: $24.99</p>
+            <button>Add to Cart</button>
+        </section>
+
+        <section class="product">
+            <img src="product1.jpg" alt="Gift 1">
+            <h2>Gift 1</h2>
+            <p>Price: $19.99</p>
+            <button>Add to Cart</button>
+        </section>
+
+        <section class="product">
+            <img src="product2.jpg" alt="Gift 2">
+            <h2>Gift 2</h2>
+            <p>Price: $24.99</p>
+            <button>Add to Cart</button>
+        </section>
+
         <section class="product">
             <img src="product1.jpg" alt="Gift 1">
             <h2>Gift 1</h2>
@@ -186,6 +197,19 @@
             <p>Price: $24.99</p>
             <button>Add to Cart</button>
         </section>
+
+        <!-- Cart Page -->
+        <section class="cart-page" id="cart">
+            <h2>Your Cart</h2>
+            <div class="cart-items">
+                <!-- Cart items will be dynamically generated here -->
+            </div>
+            <div class="cart-summary">
+                <p>Total: $<span id="totalAmount">0</span></p>
+                <a href="checkout.html" id="checkoutButton">Checkout</a>
+            </div>
+        </section>
+
 
         <!-- Add more product sections as needed -->
     </main>
