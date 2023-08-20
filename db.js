@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const URI = `mongodb+srv://drverma2704:12345@giftwala.x1ywjoh.mongodb.net/GiftWala?retryWrites=true&w=majority`;
+const URI = process.env.MONGODB_URI;
 
 async function ConnectDB() {
   try {
