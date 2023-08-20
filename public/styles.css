@@ -370,3 +370,134 @@ footer {
 #contactForm button:hover {
     background-color: #555;
 }
+
+/* ... (previous styles) ... */
+
+/* Signup page styles */
+.signup-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.signup-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.signup-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.signup-form button {
+    display: block;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.signup-form button:hover {
+    background-color: #555;
+}
+
+.error-message {
+    color: #e44d26;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+}
+
+/* ... (previous styles) ... */
+
+/* Login page styles */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.login-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.login-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-form button {
+    display: block;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.login-form button:hover {
+    background-color: #555;
+}
+
+.error-message {
+    color: #e44d26;
+    font-size: 0.8rem;
+    margin-top: 1rem;
+}
+
+.login-container p {
+    margin-top: 1rem;
+}
+
+.login-container a {
+    color: #e44d26;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-container a {
+    color: #e44d26;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ... (previous styles) ... */
+
+/* Success message styles */
+.success-message {
+    color: #43a047; /* Green color for success */
+    font-size: 0.8rem;
+    margin-top: 1rem;
+}
