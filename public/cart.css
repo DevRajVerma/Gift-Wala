@@ -1,83 +1,90 @@
 /* Reset styles */
-body, h1, h2, h3, p, ul, li, button {
-    margin: 0;
-    padding: 0;
+body,
+h1,
+h2,
+h3,
+p,
+ul,
+li,
+button {
+  margin: 0;
+  padding: 0;
 }
 
 /* Global styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
+  font-family: "Arial", sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
 /* Cart page styles */
 .cart-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-    background-color: #fff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .cart-items ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .cart-item {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #ddd;
 }
 
 .item-image img {
-    max-width: 100px;
-    height: auto;
+  max-width: 100px;
+  height: auto;
 }
 
 .item-details {
-    flex: 1;
-    margin-left: 1rem;
+  flex: 1;
+  margin-left: 1rem;
 }
 
 .item-details h2 {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
 .item-details p {
-    color: #e44d26;
-    font-weight: bold;
+  color: #e44d26;
+  font-weight: bold;
 }
 
 .item-remove button {
-    background-color: #e44d26;
-    color: #fff;
-    border: none;
-    padding: 0.25rem 0.5rem;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #e44d26;
+  color: #fff;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .cart-total {
-    margin-top: 2rem;
-    text-align: right;
+  margin-top: 2rem;
+  text-align: right;
 }
 
 .checkout-button {
-    background-color: #333;
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-weight: bold;
+  background-color: #333;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
 }
 
 /* Responsive adjustments */
 @media screen and (max-width: 768px) {
-    .cart-container {
-        padding: 1rem;
-    }
+  .cart-container {
+    padding: 1rem;
+  }
 }
