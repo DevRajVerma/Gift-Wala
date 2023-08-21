@@ -36,14 +36,7 @@ app.use(
 
 app.use(flash());
 
-app.get("/", (req, res) => {
-  req.flash("message", "Teri maa ki chut Randi ke");
-  res.redirect("/gfg");
-});
 
-app.get("/gfg", (req, res) => {
-  res.send(req.flash("message"));
-});
 
 //
 
@@ -100,7 +93,7 @@ app.post("/api/orders", (req, res) => {
 
 app.post("/api/signup", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name ,email, password } = req.body;
 
     const user = await UserModel.findOne({ email: email });
 
@@ -108,12 +101,12 @@ app.post("/api/signup", async (req, res) => {
       res.json({ message: "User already exist" });
     }
     const hashPass = await bcrypt.hash(password, 10);
-    const newUser = new UserModel({ email: email, password: hashPass });
+    const newUser = new UserModel({name:name,email: email, password: hashPass });
     await newUser.save();
-    // res.status(201).json({ message: "User Created Succesfully" });
+    // res.status(201).json({ user:req.body });
     console.log("User created Successfully");
-    // res.redirect('/api/login');
-    res.redirect("/api/login");
+    res.redirect('/api/login');
+    // res.redirect("/api/login");
 
     // res.redirect('/success');
     // res.send('Account successfully created. Please login to continue.');
@@ -153,7 +146,8 @@ app.post("/api/login", async (req, res) => {
 
     // Generate a JWT and send it to the frontend
     // const token = generateAuthToken(user);
-    res.status(200).json({ message: "login successfully" });
+    console.log(user)
+    res.status(200).json({ username: user });
   } catch (error) {
     res.status(500).json({ message: "An error occurred" + error });
   }

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Sign Up - My Store</title>
+
+    <style>
+      /* Signup page styles */
+      .signup-container {
+        max-width: 400px;
+        margin: 10rem auto;
+        padding: 2rem;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+      }
+
+      .signup-container h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        margin-left: 8rem;
+        color: #614BC3;
+      }
+
+      .signup-form label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      .signup-form input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .signup-form button {
+        display: block;
+        background-color: #333;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      .signup-form button:hover {
+        background-color: #555;
+      }
+        .login_btn{
+          color: #e44d26;
+          text-decoration: none;
+          font-weight: bold;
+          color: #614BC3;
+        }
+  
+      .input_field{
+        margin: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="signup-container">
+      <h1>Sign Up</h1>
+      <form id="signupForm" action="/api/signup" method="POST">
+        <div class="input_field">
+          <label for="name">Username</label>
+          <input type="name" id="name" placeholder="name" name="name" required />
+        </div>
+        <div  class="input_field">
+          <label for="email">Email:</label>
+          <input type="email" id="email" placeholder="email" name="email" required />
+        </div>
+        <div  class="input_field">
+          <label for="password">Password:</label>
+          <input type="password" id="password" placeholder="password" name="password" required />
+        </div>
+        <div  class="input_field">
+          <!-- <label for="confirmPassword">Confirm Password:</label> -->
+          <input type="password" placeholder="conform password"  id="confirmPassword" name="confirmPassword" required/>
+        </div>
+        <div  class="input_field">
+          <button type="submit" id="signupButton">Submit</button>
+        </div>
+      </form>
+    <div class="login_btn">
+      <a href="login.html">Login</a>
+    </div>
+    </div>
+    <!-- <script src="signup.js"></script> -->
+    <!-- <script src="signup.js"></script> -->
+  </body>
+</html>
