@@ -194,12 +194,19 @@ label input[type="checkbox"] {
 	
 	
 		<div class="right">
+    
+      <form action="/api/login" method="POST">
 		<h5>Login</h5>
-		<p>Don't have an account? <a href="#">Creat Your Account</a> it takes less than a minute</p>
+		<p>Don't have an account? <a href="signup.html">Create Your Account</a> it takes less than a minute</p>
 		<div class="inputs">
-			<input type="text" placeholder="user name">
+
+      
+			<input type="email" placeholder="email" name="email"
+      required />
 			<br>
-			<input type="password" placeholder="password">
+			<input type="password" placeholder="password" name="password" required />
+
+      
 		</div>
 			
 			<br><br>
@@ -214,7 +221,8 @@ label input[type="checkbox"] {
 		</div>
 			
 			<br>
-			<button>Login</button>
+			<button type="submit">Login</button>
+      </form>
 	</div>
 	
 </div>
