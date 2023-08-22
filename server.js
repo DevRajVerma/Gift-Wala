@@ -57,6 +57,35 @@ const products = [
   // Add more products
 ];
 
+app.get("/",(req,res) => {
+  res.render("index");
+})
+
+app.get("/signup",(req,res) => {
+  res.render("signup");
+})
+
+app.get("/login",(req,res) => {
+  res.render("login");
+})
+
+app.get("/profile",(req,res) => {
+  res.render("profile");
+})
+
+app.get("/cart",(req,res) => {
+  res.render("cart");
+})
+
+app.get("/contact",(req,res) => {
+  res.render("contact");
+})
+
+app.get("/checkout",(req,res) => {
+  res.render("checkout");
+})
+
+
 // Route to display product details page
 app.get("/product/:id", (req, res) => {
   const productId = parseInt(req.params.id);

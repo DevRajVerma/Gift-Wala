@@ -8,6 +8,8 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="cart/css/style.css" />
+
+    <link rel="stylesheet" href="styles.css">
     <!-- Demo CSS (No need to include it into your project) -->
     <link rel="stylesheet" href="cart/css/demo.css" />
 
@@ -137,6 +139,8 @@ form {
 </head>
 
 <body>
+
+        <%- include('partials/header') %>
     <div class="container d-flex justify-content-center align-items-center">
 	
         <!-- // SVG
@@ -440,6 +444,8 @@ form {
                         </g>
                 </g>
         </svg>
+
+       
         
         
         <!-- // FORM
@@ -475,11 +481,24 @@ form {
                     <button type="submit" class="btn btn-primary" tabIndex="-1">Send message</button>
                 </div>
         </form>
+
+        
         
     </div>
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     
 
     <script>
         feather.replace();
     </script>
+
+    <div>
+        <%- include('partials/footer') %>
+    </div>
 </body>
