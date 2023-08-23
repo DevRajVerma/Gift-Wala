@@ -16,9 +16,12 @@ var bodyParser = require("body-parser");
 var server = http.createServer(app);
 
 //For Connecting the database
-const ConnectDB = require("./db");
+const ConnectDB = require("./Router/db.js");
 const { log } = require("console");
 ConnectDB();
+
+const Login = require("./Router/login.js");
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -35,6 +38,7 @@ app.use(
 );
 
 app.use(flash());
+
 
 
 
@@ -58,7 +62,10 @@ const products = [
 ];
 
 app.get("/",(req,res) => {
-  res.render("index");
+
+  var title = " ";
+    // res.render('Main.html',{name:title});
+  res.render("index", {name:title});
 })
 
 app.get("/signup",(req,res) => {
@@ -75,6 +82,10 @@ app.get("/profile",(req,res) => {
 
 app.get("/cart",(req,res) => {
   res.render("cart");
+})
+
+app.get("/profile",(req,res) => {
+  res.render("profile");
 })
 
 app.get("/contact",(req,res) => {
@@ -134,9 +145,11 @@ app.post("/api/signup", async (req, res) => {
     await newUser.save();
     // res.status(201).json({ user:req.body });
     console.log("User created Successfully");
-    res.redirect('/api/login');
+    // res.redirect('/api/login');
     // res.redirect("/api/login");
 
+    var title = "LOGIN KAR BRO!";
+    res.render("index", {name:title});
     // res.redirect('/success');
     // res.send('Account successfully created. Please login to continue.');
   } catch (err) {
@@ -144,18 +157,15 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
-app.get("/api/login", function (req, res) {
-  // console.log(__dirname);
+app.get("/api/login",  (req, res)=> {
 
-  res.sendFile(path.join(__dirname, "/public", "login.html"));
-  // res.sendFile(path.join(__dirname, '/public', 'style.css'));
+  res.render("login");
 });
 
-app.get("/api/signup", function (req, res) {
-  // console.log(__dirname);
 
-  res.sendFile(path.join(__dirname, "/public", "signup.html"));
-  // res.sendFile(path.join(__dirname, '/public', 'style.css'));
+
+app.get("/api/signup", function (req, res) {
+  res.render("signup");
 });
 
 app.post("/api/login", async (req, res) => {
@@ -175,8 +185,11 @@ app.post("/api/login", async (req, res) => {
 
     // Generate a JWT and send it to the frontend
     // const token = generateAuthToken(user);
-    console.log(user)
-    res.status(200).json({ username: user });
+    console.log(user);
+    title = user.name;
+    res.render("index", {name:title});
+    // res.status(200).json({ username: user });
+
   } catch (error) {
     res.status(500).json({ message: "An error occurred" + error });
   }
