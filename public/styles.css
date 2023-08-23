@@ -107,7 +107,7 @@ footer {
   padding: 1rem 1rem; /* Adjust as needed */
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column; /* Stack elements vertically */
 }
 
@@ -222,8 +222,8 @@ footer {
 .search-bar {
   width: 100%;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   flex-grow: 1; /* Expand to take available space */
 }
 

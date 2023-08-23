@@ -11,50 +11,53 @@
   <body>
     <header class="main-header">
       <!-- ... (previous HTML code) ... -->
-
       <div class="top-header">
         <div class="logo-name">
           <a href="/">
             <img src="/images/logo.png" alt="Gift Shop Logo" />
           </a>
-
-          <p>Gift Wala</p>
+      
+          <p style="color: white;">Gift Wala</p>
         </div>
         <div class="top-icons">
           <!-- <a href="signup"><button class="signup-button">Sign up</button></a> -->
           <h3 contenteditable="true" style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"><%= name %></h3>
-
+      
           <a href="cart"><button class="cart-button">Cart</button></a>
-          <a href="login"><button class="login-button">Login</button></a>
+          <a href="login"><button class="login-button"><%= login_status %></button></a>
           <a href="profile"><button class="profile-button">Profile</button></a>
           
-
+      
           
-
+      
           <div class="menu-dropdown">
             <button class="menu-button">
               <img style="width: 12.734px; height: 25px;" src="/images/kebab-menu.png" alt="kebab-menu">
               <!-- <img src="kebab.png" alt="menu" style="max-width: 10%;  
                         height: auto;  "> -->
             </button>
-
+      
             <div class="dropdown-content">
               <!-- <a href="/">Home</a> -->
               <!-- <a href="#">Products</a> -->
               <a href="contact">Contact</a>
+              <a href="add_products">Add to Products</a>
               
             </div>
           </div>
         </div>
       </div>
-
+      
       <!-- ... (remaining HTML code) ... -->
-
-      <div class="bottom-header">
-        <div class="search-bar">
-          <input type="text" placeholder="Search for products..." />
+      
+      <div class="bottom-header" style="width: 30%; padding-bottom: 0px; padding-top: 9px;">
+        <div class="search-bar" style="align-items: flex-start ; width: 700px; height: 68; padding-top: 7px;">
+          <input type="text" placeholder="Search for products..."
+          style="padding-bottom: 14px; padding-top: 14px; width: 60%;" />
         </div>
       </div>
+      
+      
     </header>
 
     <main>

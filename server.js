@@ -64,72 +64,94 @@ const products = [
 app.get("/",(req,res) => {
 
   var title = " ";
+  var login_status = "Login";
     // res.render('Main.html',{name:title});
-  res.render("index", {name:title});
+  res.render("index", {name:title,
+  login_status: login_status});
 })
 
 app.get("/signup",(req,res) => {
-  res.render("signup");
+
+  var title = " ";
+  var login_status = "login";
+  res.render("signup", {name:title,
+  login_status: login_status});
+  
 })
 
 app.get("/login",(req,res) => {
-  res.render("login");
+
+  var title = " ";
+  var login_status = "";
+  res.render("login", {name:title,
+  login_status: login_status});
+  
 })
 
 app.get("/profile",(req,res) => {
-  res.render("profile");
+
+  var title = " ";
+  var login_status = "";
+  res.render("profile", {name:title,
+  login_status: login_status});
+  // res.render("profile");
 })
 
 app.get("/cart",(req,res) => {
   res.render("cart");
 })
 
-app.get("/profile",(req,res) => {
-  res.render("profile");
+app.get("/add_products",(req,res) => {
+  res.render("add_products");
 })
 
 app.get("/contact",(req,res) => {
-  res.render("contact");
+
+  var title = " ";
+  var login_status = "";
+  res.render("contact", {name:title,
+  login_status: login_status});
+  
+})
+
+app.get("/api/contact",(req,res) => {
+
+  var title = " ";
+  var login_status = "";
+  res.render("contact", {name:title,
+  login_status: login_status});
+  
+})
+
+app.get("/api/profile",(req,res) => {
+
+  var title = " ";
+  var login_status = "";
+  res.render("profile", {name:title,
+  login_status: login_status});
+  
+})
+
+
+app.get("/api/add_products",(req,res) => {
+
+  var title = " ";
+  var login_status = "";
+  res.render("add_products", {name:title,
+  login_status: login_status});
+  
 })
 
 app.get("/checkout",(req,res) => {
   res.render("checkout");
 })
 
+app.post("/api/add_products", async (req, res) =>{
 
-// Route to display product details page
-app.get("/product/:id", (req, res) => {
-  const productId = parseInt(req.params.id);
-  const product = products.find((item) => item.id === productId);
-  if (product) {
-    res.render("product", { product });
-  } else {
-    res.status(404).send("Product not found");
-  }
-});
-
-// Example API endpoint to simulate fetching products
-app.get("/api/products", (req, res) => {
-  const products = [
-    { id: 1, name: "Product 1", price: 19.99 },
-    { id: 2, name: "Product 2", price: 24.99 },
-    // Add more products
-  ];
-  res.json(products);
-});
-
-// Example API endpoint to simulate placing an order
-app.post("/api/orders", (req, res) => {
-  // Simulate processing the order
-  const order = { orderId: 123, success: true };
-  res.json(order);
-});
-
-// Signup details
-// app.post('/add', function(req,res){
-//     console.log("lofkjdskjfndbjvsbdv");
-//     res.send("Teri maa ki chut");
-//   });
+  const { productName, Description, Price } = req.body;
+  console.log(req.body);
+  res.redirect("/");
+})
 
 app.post("/api/signup", async (req, res) => {
   try {
@@ -148,8 +170,10 @@ app.post("/api/signup", async (req, res) => {
     // res.redirect('/api/login');
     // res.redirect("/api/login");
 
+    var login_status = "Login";
     var title = "LOGIN KAR BRO!";
-    res.render("index", {name:title});
+    res.render("index", {name:title,
+      login_status: login_status});
     // res.redirect('/success');
     // res.send('Account successfully created. Please login to continue.');
   } catch (err) {
@@ -159,7 +183,12 @@ app.post("/api/signup", async (req, res) => {
 
 app.get("/api/login",  (req, res)=> {
 
-  res.render("login");
+  var login_status = "";
+    var title = "";
+    res.render("login", {name:title,
+      login_status: login_status});
+
+  // res.render("login");
 });
 
 
@@ -186,8 +215,15 @@ app.post("/api/login", async (req, res) => {
     // Generate a JWT and send it to the frontend
     // const token = generateAuthToken(user);
     console.log(user);
-    title = user.name;
-    res.render("index", {name:title});
+
+
+    var login_status = "Login";
+    var title = user.name;
+    res.render("index", {name:title,
+      login_status: login_status});
+    
+    // title = user.name;
+    // res.render("index", {name:title});
     // res.status(200).json({ username: user });
 
   } catch (error) {
