@@ -16,11 +16,11 @@ var bodyParser = require("body-parser");
 var server = http.createServer(app);
 
 //For Connecting the database
-const ConnectDB = require("./Router/db.js");
+const ConnectDB = require("./db");
 const { log } = require("console");
 ConnectDB();
 
-const Login = require("./Router/login.js");
+// const Login = require("./login.js");
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
