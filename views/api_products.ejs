@@ -62,14 +62,14 @@
 
     <main>
 
-        <% for (var i =1; i <=10;  i++ ) { %>
+        <% for (var i =0; i <details.length;  i++ ) { %>
             <section class="product">
                 <!-- <img src="product1.jpg" alt="Gift 1" /> -->
-                <h2><%= ProductName %></h2>
+                <h2><%= details[i].ProductName%></h2>
                
-                <img src="<%= ImageUrl %>" alt="image-url">
-                <p>₹<%= Price %></p>
-                <p>Description: <%= Description %></p>
+                <img src="<%= details[i].ImageUrl %>" alt="image-url">
+                <p>₹<%= details[i].Price %></p>
+                <p><%= details[i].Desription %></p>
                 <button>Add to Cart</button>
               </section>
             <%#  will output the numbers 1-10 %>
@@ -78,15 +78,7 @@
             
 
 
-      <section class="product">
-        <!-- <img src="product1.jpg" alt="Gift 1" /> -->
-        <h2><%= ProductName %></h2>
-        <!-- <p>Image: <%= ImageUrl %></p> -->
-        <img src="<%= ImageUrl %>" alt="image-url">
-        <p>₹<%= Price %></p>
-        <p>Description: <%= Description %></p>
-        <button>Add to Cart</button>
-      </section>
+      
 
       <!-- <section class="product">
         <img src="product2.jpg" alt="Gift 2" />

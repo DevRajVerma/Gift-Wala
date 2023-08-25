@@ -42,7 +42,6 @@ app.use(flash());
 
 
 
-
 //
 
 // Sample product data
@@ -185,6 +184,8 @@ app.post("/api/add_products", async (req, res) =>{
   }
 })
 
+
+
 app.post("/api/signup", async (req, res) => {
   try {
     const { name ,email, password } = req.body;
@@ -212,6 +213,26 @@ app.post("/api/signup", async (req, res) => {
     res.status(201).json({ message: "Error In Creating user" + err });
   }
 });
+
+app.get('/api/products',async (req,res) =>{
+  try{
+
+    var login_status = "";
+    var title = "";
+    
+    const response = await Product.find();
+    
+    // const details = response;
+    // var login_status = "Login";
+    // var title = "LOGIN KAR BRO!";
+    res.render("api_products", {details:response,name:title,login_status: login_status});
+    // console.log(response);
+    // res.status(200).json({message:response});
+  }catch(err){
+   console.log("Error in getting the products");
+  }
+ }
+)
 
 app.get("/api/login",  (req, res)=> {
 
