@@ -61,14 +61,33 @@ const products = [
   // Add more products
 ];
 
-app.get("/",(req,res) => {
+// app.get("/",(req,res) => {
 
-  var title = " ";
-  var login_status = "Login";
-    // res.render('Main.html',{name:title});
-  res.render("index", {name:title,
-  login_status: login_status});
-})
+//   var title = " ";
+//   var login_status = "Login";
+
+//   const response = await Product.find();
+//     res.render("api_products", {details:response,name:title,login_status: login_status});
+//     // res.render('Main.html',{name:title});
+//   // res.render("index", {name:title,
+//   // login_status: login_status});
+// })
+
+app.get('/',async (req,res) =>{
+  try{
+
+    var login_status = "Login";
+    var title = "";
+    
+    //fetch the data from database
+    const response = await Product.find();
+    res.render("index", {details:response,name:title,login_status: login_status});
+    
+  }catch(err){
+   console.log("Error in getting the products");
+  }
+ }
+)
 
 app.get("/signup",(req,res) => {
 
@@ -220,14 +239,10 @@ app.get('/api/products',async (req,res) =>{
     var login_status = "";
     var title = "";
     
+    //fetch the data from database
     const response = await Product.find();
-    
-    // const details = response;
-    // var login_status = "Login";
-    // var title = "LOGIN KAR BRO!";
     res.render("api_products", {details:response,name:title,login_status: login_status});
-    // console.log(response);
-    // res.status(200).json({message:response});
+    
   }catch(err){
    console.log("Error in getting the products");
   }
@@ -292,7 +307,7 @@ app.post("/api/login", async (req, res) => {
     console.log(user);
 
 
-    var login_status = "Login";
+    var login_status = "";
     var title = user.name;
     res.render("index", {name:title,
       login_status: login_status});

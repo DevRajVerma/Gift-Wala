@@ -63,146 +63,28 @@
     </header>
 
     <main>
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
+      
 
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
+       <% for (var i =20; i <details.length;  i++ ) { %>
+            <section class="product">
+                <!-- <img src="product1.jpg" alt="Gift 1" /> -->
+                <h2><%= details[i].ProductName%></h2>
+               
+                <img src="<%= details[i].ImageUrl %>" alt="image-url">
+                <p>₹<%= details[i].Price %></p>
 
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
+                <% /* %>
+            <p><%= details[i].Desription %></p>
+            <% */ %>
+                 
+                <button>Add to Cart</button>
+              </section>
+            <%#  will output the numbers 1-10 %>
+            <% } %>
 
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
+            
 
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product1.jpg" alt="Gift 1" />
-        <h2>Gift 1</h2>
-        <p>Price: Rs.19.99</p>
-        <button>Add to Cart</button>
-      </section>
-
-      <section class="product">
-        <img src="product2.jpg" alt="Gift 2" />
-        <h2>Gift 2</h2>
-        <p>Price: Rs.24.99</p>
-        <button>Add to Cart</button>
-      </section>
-
+       
 
       <!-- Add more product sections as needed -->
     </main>
