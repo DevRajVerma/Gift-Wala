@@ -12,7 +12,11 @@ const userSchema = new mongoose.Schema({
     password:{
         type:String,
         required:true
-    }
+    },
+    productArray:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Product',
+    }]
 });
 
 const UserModel = mongoose.model('User',userSchema);
