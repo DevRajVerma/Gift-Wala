@@ -36,26 +36,26 @@ app.use(
 
 app.use(flash());
 
-//
 
-// Sample product data
-const products = [
-  {
-    id: 1,
-    name: "Product 1",
-    price: 19.99,
-    description: "Description for Product 1",
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    price: 24.99,
-    description: "Description for Product 2",
-  },
-  // Add more products
-];
 
 app.get("/", async (req, res) => {
+  try {
+    var login_status = "Login";
+    var title = "";
+
+    //fetch the data from database
+    const response = await Product.find();
+    res.render("index", {
+      details: response,
+      name: title,
+      login_status: login_status,
+    });
+  } catch (err) {
+    console.log("Error in getting the products");
+  }
+});
+
+app.get("/products", async (req, res) => {
   try {
     var login_status = "Login";
     var title = "";
@@ -100,6 +100,9 @@ app.get("/contact", (req, res) => {
   var login_status = "";
   res.render("contact", { name: title, login_status: login_status });
 });
+
+
+
 
 app.get("/api/contact", (req, res) => {
   var title = " ";
@@ -176,10 +179,7 @@ app.post("/api/signup", async (req, res) => {
     await newUser.save();
     // res.status(201).json({ user:req.body });
     console.log("User created Successfully");
-    // res.redirect('/api/login');
-
-    // res.redirect("/api/login");
-
+    
     const response = await Product.find();
 
     
@@ -198,7 +198,7 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
-app.get("/api/products", async (req, res) => {
+app.get("/api/secret/products", async (req, res) => {
   try {
     var login_status = "";
     var title = "";
@@ -223,26 +223,25 @@ app.get("/api/login", (req, res) => {
   // res.render("login");
 });
 
-app.get("/Ankit", (req, res) => {
-  var login_status = "";
-  var title = "";
+// app.get("/Ankit", (req, res) => {
+//   var login_status = "";
+//   var title = "";
 
-  var ProductName = "Ankit";
-  var ImageUrl = "/images/Ankit.jpg";
-  var Price = "500";
-  var Description = "Very lamba land";
+//   var ProductName = "Ankit";
+//   var ImageUrl = "/images/Ankit.jpg";
+//   var Price = "500";
+//   var Description = "Very lamba land";
 
-  res.render("products", {
-    name: title,
-    login_status: login_status,
-    ProductName: ProductName,
-    ImageUrl: ImageUrl,
-    Price: Price,
-    Description: Description,
-  });
+//   res.render("products", {
+//     name: title,
+//     login_status: login_status,
+//     ProductName: ProductName,
+//     ImageUrl: ImageUrl,
+//     Price: Price,
+//     Description: Description,
+//   });
 
-  // res.render("login");
-});
+// });
 
 app.get("/api/signup", function (req, res) {
 
@@ -301,6 +300,8 @@ server.listen(3000, function () {
 });
 
 
+
+//Database Code by Ankush Mehra
 app.post('/api/save',async (req,res)=>{
     try{
       const [userId,productId] =  req.body;
@@ -323,6 +324,7 @@ app.post('/api/save',async (req,res)=>{
     }
 })
 
+//Database Code by Ankush Mehra
 app.get('/api/savedproduct',async(req,res)=>{
   try{
     const [ userId ] =  req.body;
