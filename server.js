@@ -3,6 +3,8 @@ const express = require("express");
 const session = require("express-session");
 const flash = require("connect-flash");
 const bcrypt = require("bcrypt");
+const cookieparser = require("cookie-parser");
+
 const app = express();
 
 const UserModel = require("./model/user.js");
@@ -22,24 +24,19 @@ const { log } = require("console");
 ConnectDB();
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cookieparser());
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-app.use(
-  session({
-    secret: "geeksforgeeks",
-    saveUninitialized: true,
-    resave: true,
-  })
-);
-
 app.use(flash());
 
-
+// render the ejs views
+app.set("views", path.join(__dirname, "views"));
 
 app.get("/", async (req, res) => {
   try {
+    // check if user is logged in, by checking cookie
+    let username = req.cookies.username;
     var login_status = "Login";
     var title = "";
 
@@ -49,10 +46,43 @@ app.get("/", async (req, res) => {
       details: response,
       name: title,
       login_status: login_status,
+      username,
     });
   } catch (err) {
     console.log("Error in getting the products");
   }
+});
+
+app.post("/process_login", (req, res) => {
+  // get the data
+  let { username, password } = req.body;
+
+  // fake test data
+  let userdetails = {
+    username: "Bob",
+    password: "123456",
+  };
+
+  // basic check
+  if (
+    username === userdetails["username"] &&
+    password === userdetails["password"]
+  ) {
+    // saving the data to the cookies
+    res.cookie("username", username);
+    // redirect
+    return res.redirect("/welcome");
+  } else {
+    // redirect with a fail msg
+    return res.redirect("/login?msg=fail");
+  }
+});
+
+app.get("/logout", (req, res) => {
+  // clear the cookie
+  res.clearCookie("username");
+  // redirect to login
+  return res.redirect("/login");
 });
 
 app.get("/products", async (req, res) => {
@@ -79,9 +109,25 @@ app.get("/signup", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  // check if there is a msg query
+  let bad_auth = req.query.msg ? true : false;
   var title = " ";
   var login_status = "";
-  res.render("login", { name: title, login_status: login_status });
+
+  // if there exists, send the error.
+  if (bad_auth) {
+    return res.render("login", {
+      error: "Invalid username or password",
+      name: title,
+      login_status: login_status,
+    });
+  } else {
+    // else just render the login
+    return res.render("login", {
+      name: title,
+      login_status: login_status,
+    });
+  }
 });
 
 app.get("/profile", (req, res) => {
@@ -100,9 +146,6 @@ app.get("/contact", (req, res) => {
   var login_status = "";
   res.render("contact", { name: title, login_status: login_status });
 });
-
-
-
 
 app.get("/api/contact", (req, res) => {
   var title = " ";
@@ -179,10 +222,9 @@ app.post("/api/signup", async (req, res) => {
     await newUser.save();
     // res.status(201).json({ user:req.body });
     console.log("User created Successfully");
-    
+
     const response = await Product.find();
 
-    
     var login_status = "LOGIN KAR BRO!";
     var title = "";
 
@@ -223,32 +265,11 @@ app.get("/api/login", (req, res) => {
   // res.render("login");
 });
 
-// app.get("/Ankit", (req, res) => {
-//   var login_status = "";
-//   var title = "";
-
-//   var ProductName = "Ankit";
-//   var ImageUrl = "/images/Ankit.jpg";
-//   var Price = "500";
-//   var Description = "Very lamba land";
-
-//   res.render("products", {
-//     name: title,
-//     login_status: login_status,
-//     ProductName: ProductName,
-//     ImageUrl: ImageUrl,
-//     Price: Price,
-//     Description: Description,
-//   });
-
-// });
-
 app.get("/api/signup", function (req, res) {
-
   var login_status = "login";
   var title = "";
   res.render("signup", { name: title, login_status: login_status });
-// 
+  //
   // res.render("signup");
 });
 
@@ -273,8 +294,11 @@ app.post("/api/login", async (req, res) => {
 
     var login_status = "";
     var title = user.name;
+    var username = user.email;
 
     const response = await Product.find();
+
+    res.cookie("username", username);
 
     res.render("index", {
       details: response,
@@ -290,56 +314,87 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Start the server
-// app.listen(port, () => {
-//     console.log(`Server is running on port ${port}`);
-// });
+
+app.post("/process_login", (req, res) => {
+  // get the data
+  let { username, password } = req.body;
+
+  // fake test data
+  let userdetails = {
+    username: "Bob",
+    password: "123456",
+  };
+
+  // basic check
+  if (
+    username === userdetails["username"] &&
+    password === userdetails["password"]
+  ) {
+    // saving the data to the cookies
+    res.cookie("username", username);
+    // redirect
+    return res.redirect("/welcome");
+  } else {
+    // redirect with a fail msg
+    return res.redirect("/login?msg=fail");
+  }
+});
+
+app.get("/welcome", (req, res) => {
+  // get the username
+  let username = req.cookies.username;
+
+  // render welcome page
+  return res.render("welcome", {
+    username,
+  });
+});
+
 
 server.listen(3000, function () {
   console.log("Server listening on port: 3000");
 });
 
-
-
 //Database Code by Ankush Mehra
-app.post('/api/save',async (req,res)=>{
-    try{
-      const [userId,productId] =  req.body;
-      
-      const user = await UserModel.findById(userId);
-      const product = await Product.findById(productId);
-      if(!user){
-        res.status(404).json({message:" User Does Not exist"})
-      }
-      if(!product){
-        res.status(404).json({message:"Product Does not exist"})
-      }
-     user.productArray.push(product);
-     await user.save();
+app.post("/api/save", async (req, res) => {
+  try {
+    const [userId, productId] = req.body;
 
-      res.status(200).json({message:"Product Added To Cart Sussessfully"})
-    }catch(err){
-      console.log('Error In saving in Products',err);
-      res.status(404).json({message:err})
+    const user = await UserModel.findById(userId);
+    const product = await Product.findById(productId);
+    if (!user) {
+      res.status(404).json({ message: " User Does Not exist" });
     }
-})
+    if (!product) {
+      res.status(404).json({ message: "Product Does not exist" });
+    }
+    user.productArray.push(product);
+    await user.save();
+
+    res.status(200).json({ message: "Product Added To Cart Sussessfully" });
+  } catch (err) {
+    console.log("Error In saving in Products", err);
+    res.status(404).json({ message: err });
+  }
+});
 
 //Database Code by Ankush Mehra
-app.get('/api/savedproduct',async(req,res)=>{
-  try{
-    const [ userId ] =  req.body;
+app.get("/api/savedproduct", async (req, res) => {
+  try {
+    const [userId] = req.body;
     const user = await UserModel.findById(userId);
 
-    if(!user){
-      res.status(404).json({message:" User Does Not exist"})
+    if (!user) {
+      res.status(404).json({ message: " User Does Not exist" });
     }
 
     const saveRecipiesId = await Product.find({
-      _id:{ $in : user.productArray}
-    })
-    res.status(200).json({message:saveRecipiesId})
-  }catch(err){
-      console.log('Error In Fetching the Products',err);
-      res.status(404).json({message:err})
-    }
-})
+      _id: { $in: user.productArray },
+    });
+    res.status(200).json({ message: saveRecipiesId });
+  } catch (err) {
+    console.log("Error In Fetching the Products", err);
+    res.status(404).json({ message: err });
+  }
+});
+

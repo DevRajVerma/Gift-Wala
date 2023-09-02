@@ -1,0 +1,9 @@
+<div class="welcome">
+
+    <%if(locals.username){%>
+    <p>You are logged in as <%=username%></p>
+    <a href="/logout">Logout</a>
+    <%} else { %>
+    <a href="/login">Login</a>
+    <% } %>
+</div>

@@ -21,7 +21,7 @@
         </div>
         <div class="top-icons">
           <!-- <a href="signup"><button class="signup-button">Sign up</button></a> -->
-          <h3 contenteditable="true" style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"><%= name %></h3>
+          <h3 style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"><%= name %></h3>
       
           <a href="cart"><button class="cart-button">Cart</button></a>
           <a href="login"><button class="login-button"><%= login_status %></button></a>
@@ -41,6 +41,7 @@
               <!-- <a href="/">Home</a> -->
               <!-- <a href="#">Products</a> -->
               <a href="contact">Contact</a>
+              <a href="/logout">Logout</a>
               <!-- <a href="add_products">Add to Products</a> -->
               <!-- <a href="products">Products</a> -->
 
@@ -63,7 +64,7 @@
     </header>
 
     <main>
-      
+
 
        <% for (var i =20; i <details.length;  i++ ) { %>
             <section class="product">
