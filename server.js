@@ -35,10 +35,26 @@ app.set("views", path.join(__dirname, "views"));
 
 app.get("/", async (req, res) => {
   try {
-    // check if user is logged in, by checking cookie
     let username = req.cookies.username;
-    var login_status = "Login";
-    var title = "";
+    var email = username;
+
+    const user = await UserModel.findOne({ email });
+
+    // if (!user) {
+    //   return res.status(401).json({ message: "Invalid credentials" });
+    // }
+
+    if (user) {
+      var title = user.name;
+      var login_status = "";
+    } else {
+      var title = "";
+      var login_status = "Login";
+    }
+
+    // check if user is logged in, by checking cookie
+
+    
 
     //fetch the data from database
     const response = await Product.find();
@@ -50,31 +66,6 @@ app.get("/", async (req, res) => {
     });
   } catch (err) {
     console.log("Error in getting the products");
-  }
-});
-
-app.post("/process_login", (req, res) => {
-  // get the data
-  let { username, password } = req.body;
-
-  // fake test data
-  let userdetails = {
-    username: "Bob",
-    password: "123456",
-  };
-
-  // basic check
-  if (
-    username === userdetails["username"] &&
-    password === userdetails["password"]
-  ) {
-    // saving the data to the cookies
-    res.cookie("username", username);
-    // redirect
-    return res.redirect("/welcome");
-  } else {
-    // redirect with a fail msg
-    return res.redirect("/login?msg=fail");
   }
 });
 
@@ -130,13 +121,6 @@ app.get("/login", (req, res) => {
   }
 });
 
-app.get("/profile", (req, res) => {
-  var title = " ";
-  var login_status = "";
-  res.render("profile", { name: title, login_status: login_status });
-  // res.render("profile");
-});
-
 app.get("/cart", (req, res) => {
   res.render("cart");
 });
@@ -165,10 +149,27 @@ app.get("/add_products", (req, res) => {
   res.render("add_products", { name: title, login_status: login_status });
 });
 
-app.get("/api/profile", (req, res) => {
-  var title = " ";
+app.get("/api/profile", async (req, res) => {
+  let username = req.cookies.username;
+  var email = username;
+
+  const user = await UserModel.findOne({ email });
+
+  if (!user) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  var title = user.name;
   var login_status = "";
-  res.render("profile", { name: title, login_status: login_status });
+  var usermail = user.email;
+
+  res.render("profile", {
+    name: title,
+    login_status: login_status,
+    usermail : usermail,
+  });
+  // res.render("profile", { name: title, login_status: login_status });
+  // res.render("profile");
 });
 
 app.get("/api/add_products", (req, res) => {
@@ -273,6 +274,37 @@ app.get("/api/signup", function (req, res) {
   // res.render("signup");
 });
 
+app.get("/profile", async (req, res) => {
+  let username = req.cookies.username;
+  var email = username;
+
+  const user = await UserModel.findOne({ email });
+
+  if (!user) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  var title = user.name;
+  var login_status = "";
+
+  res.render("profile", {
+    name: title,
+    login_status: login_status,
+  });
+  res.render("profile", { name: title, login_status: login_status });
+  // res.render("profile");
+});
+
+app.get("/welcome", (req, res) => {
+  // get the username
+  let username = req.cookies.username;
+
+  // render welcome page
+  return res.render("welcome", {
+    username,
+  });
+});
+
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -305,38 +337,8 @@ app.post("/api/login", async (req, res) => {
       name: title,
       login_status: login_status,
     });
-
-    // title = user.name;
-    // res.render("index", {name:title});
-    // res.status(200).json({ username: user });
   } catch (error) {
     res.status(500).json({ message: "An error occurred" + error });
-  }
-});
-
-
-app.post("/process_login", (req, res) => {
-  // get the data
-  let { username, password } = req.body;
-
-  // fake test data
-  let userdetails = {
-    username: "Bob",
-    password: "123456",
-  };
-
-  // basic check
-  if (
-    username === userdetails["username"] &&
-    password === userdetails["password"]
-  ) {
-    // saving the data to the cookies
-    res.cookie("username", username);
-    // redirect
-    return res.redirect("/welcome");
-  } else {
-    // redirect with a fail msg
-    return res.redirect("/login?msg=fail");
   }
 });
 
@@ -349,7 +351,6 @@ app.get("/welcome", (req, res) => {
     username,
   });
 });
-
 
 server.listen(3000, function () {
   console.log("Server listening on port: 3000");
@@ -397,4 +398,3 @@ app.get("/api/savedproduct", async (req, res) => {
     res.status(404).json({ message: err });
   }
 });
-
