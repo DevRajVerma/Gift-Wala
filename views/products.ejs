@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EDHWHQ1H31");
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="/styles.css" type="text/css" />
     <title>Gift Wala</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
   </head>
@@ -16,73 +30,91 @@
           <a href="/">
             <img src="/images/logo.png" alt="Gift Shop Logo" />
           </a>
-      
-          <p style="color: white;">Gift Wala</p>
+
+          <p style="color: white">Gift Wala</p>
         </div>
         <div class="top-icons">
           <!-- <a href="signup"><button class="signup-button">Sign up</button></a> -->
-          <h3 contenteditable="true" style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"><%= name %></h3>
-      
+          <h3
+            contenteditable="true"
+            style="
+              font-family: sans-serif;
+              text-align: center;
+              color: rgb(255, 255, 255);
+            "
+          >
+            <%= name %>
+          </h3>
+
           <a href="cart"><button class="cart-button">Cart</button></a>
-          <a href="login"><button class="login-button"><%= login_status %></button></a>
+          <a href="login"
+            ><button class="login-button"><%= login_status %></button></a
+          >
           <a href="profile"><button class="profile-button">Profile</button></a>
-          
-      
-          
-      
+
           <div class="menu-dropdown">
             <button class="menu-button">
-              <img style="width: 12.734px; height: 25px;" src="/images/kebab-menu.png" alt="kebab-menu">
+              <img
+                style="width: 12.734px; height: 25px"
+                src="/images/kebab-menu.png"
+                alt="kebab-menu"
+              />
               <!-- <img src="kebab.png" alt="menu" style="max-width: 10%;  
                         height: auto;  "> -->
             </button>
-      
+
             <div class="dropdown-content">
               <!-- <a href="/">Home</a> -->
               <!-- <a href="#">Products</a> -->
               <a href="contact">Contact</a>
               <a href="add_products">Add to Products</a>
-              
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- ... (remaining HTML code) ... -->
-      
-      <div class="bottom-header" style="width: 30%; padding-bottom: 0px; padding-top: 9px;">
-        <div class="search-bar" style="align-items: flex-start ; width: 700px; height: 68; padding-top: 7px;">
-          <input type="text" placeholder="Search for products..."
-          style="padding-bottom: 14px; padding-top: 14px; width: 60%;" />
+
+      <div
+        class="bottom-header"
+        style="width: 30%; padding-bottom: 0px; padding-top: 9px"
+      >
+        <div
+          class="search-bar"
+          style="
+            align-items: flex-start;
+            width: 700px;
+            height: 68;
+            padding-top: 7px;
+          "
+        >
+          <input
+            type="text"
+            placeholder="Search for products..."
+            style="padding-bottom: 14px; padding-top: 14px; width: 60%"
+          />
         </div>
       </div>
-      
-      
     </header>
 
     <main>
+      <% for (var i =1; i <=10; i++ ) { %>
+      <section class="product">
+        <!-- <img src="product1.jpg" alt="Gift 1" /> -->
+        <h2><%= ProductName %></h2>
 
-        <% for (var i =1; i <=10;  i++ ) { %>
-            <section class="product">
-                <!-- <img src="product1.jpg" alt="Gift 1" /> -->
-                <h2><%= ProductName %></h2>
-               
-                <img src="<%= ImageUrl %>" alt="image-url">
-                <p>₹<%= Price %></p>
-                <p>Description: <%= Description %></p>
-                <button>Add to Cart</button>
-              </section>
-            <%#  will output the numbers 1-10 %>
-            <% } %>
-
-            
-
+        <img src="<%= ImageUrl %>" alt="image-url" />
+        <p>₹<%= Price %></p>
+        <p>Description: <%= Description %></p>
+        <button>Add to Cart</button>
+      </section>
+      <%# will output the numbers 1-10 %> <% } %>
 
       <section class="product">
         <!-- <img src="product1.jpg" alt="Gift 1" /> -->
         <h2><%= ProductName %></h2>
         <!-- <p>Image: <%= ImageUrl %></p> -->
-        <img src="<%= ImageUrl %>" alt="image-url">
+        <img src="<%= ImageUrl %>" alt="image-url" />
         <p>₹<%= Price %></p>
         <p>Description: <%= Description %></p>
         <button>Add to Cart</button>

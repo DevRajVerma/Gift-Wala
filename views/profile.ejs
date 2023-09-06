@@ -1,26 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EDHWHQ1H31");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Profile - Gift Wala</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/styles.css" />
 
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <style>
-        /* Reset some default styles */
-body, h1, h2, ul, p, table {
-    margin: 0;
-    padding: 0;
-}
+      /* Reset some default styles */
+      body,
+      h1,
+      h2,
+      ul,
+      p,
+      table {
+        margin: 0;
+        padding: 0;
+      }
 
-/* Set the base font size for responsiveness */
-html {
-    font-size: 16px;
-}
+      /* Set the base font size for responsiveness */
+      html {
+        font-size: 16px;
+      }
 
-/* Basic styling for the header */
-/* header {
+      /* Basic styling for the header */
+      /* header {
     background: linear-gradient(to right, #cf268a, #6b0772);
     color: #fff;
     padding: 1.5rem 2rem;
@@ -29,165 +48,160 @@ html {
     align-items: center;
 } */
 
-header h1 {
-    font-size: 2rem;
-}
+      header h1 {
+        font-size: 2rem;
+      }
 
-header a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
+      header a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: bold;
+      }
 
-/* Main content container */
-section {
-    margin: 1rem 2rem;
-    padding: 1.5rem;
-    border: 1px solid #ddd;
-    background-color: #f9f9f9;
-}
+      /* Main content container */
+      section {
+        margin: 1rem 2rem;
+        padding: 1.5rem;
+        border: 1px solid #ddd;
+        background-color: #f9f9f9;
+      }
 
-/* Styling for personal information section */
-.user-info {
-    background-color: #fff;
-    padding: 1rem;
-}
+      /* Styling for personal information section */
+      .user-info {
+        background-color: #fff;
+        padding: 1rem;
+      }
 
-.user-info p {
-    margin-bottom: 1rem;
-}
-
-/* Styling for shipping addresses section */
-.shipping-addresses ul {
-    list-style: none;
-}
-
-.shipping-addresses li {
-    margin-bottom: 1rem;
-}
-
-/* Styling for order history table */
-.order-history table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.order-history th, .order-history td {
-    border: 1px solid #ddd;
-    padding: 1rem;
-    text-align: left;
-}
-
-.order-history th {
-    background-color: #333;
-    /* background: linear-gradient(to right, #242323, #686363); */
-    color: #fff;
-}
-
-/* Styling for coupons section */
-.coupons ul {
-    list-style: disc;
-    margin-left: 2rem;
-    padding-left: 1rem;
-}
-
-/* Styling for footer */
-footer {
-    text-align: center;
-    /* background: linear-gradient(to right, #cf268a, #6b0772); */
-    color: #fff;
-    padding: 1rem 0;
-}
-
-/* Media query for responsiveness */
-@media (max-width: 768px) {
-    header {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    header h1 {
+      .user-info p {
         margin-bottom: 1rem;
-    }
-}
+      }
 
+      /* Styling for shipping addresses section */
+      .shipping-addresses ul {
+        list-style: none;
+      }
+
+      .shipping-addresses li {
+        margin-bottom: 1rem;
+      }
+
+      /* Styling for order history table */
+      .order-history table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .order-history th,
+      .order-history td {
+        border: 1px solid #ddd;
+        padding: 1rem;
+        text-align: left;
+      }
+
+      .order-history th {
+        background-color: #333;
+        /* background: linear-gradient(to right, #242323, #686363); */
+        color: #fff;
+      }
+
+      /* Styling for coupons section */
+      .coupons ul {
+        list-style: disc;
+        margin-left: 2rem;
+        padding-left: 1rem;
+      }
+
+      /* Styling for footer */
+      footer {
+        text-align: center;
+        /* background: linear-gradient(to right, #cf268a, #6b0772); */
+        color: #fff;
+        padding: 1rem 0;
+      }
+
+      /* Media query for responsiveness */
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        header h1 {
+          margin-bottom: 1rem;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <header><%- include('partials/header') %></header>
 
-    <header>
-        <%- include('partials/header') %>
-    </header>
-
-    
     <!-- <header>
         <h1>Your Profile</h1>
         <a href="logout.php">Logout</a>
     </header> -->
 
-
     <section class="user-info">
-        <h2>Personal Information</h2>
-        <p>Name: <%= name %></p>
-        <p>Email: <%= usermail %></p>
+      <h2>Personal Information</h2>
+      <p>Name: <%= name %></p>
+      <p>Email: <%= usermail %></p>
     </section>
 
     <section class="shipping-addresses">
-        <h2>Shipping Addresses</h2>
-        <ul>
-            <li>
-                <strong>Address 1:</strong>
-                123 Main St, City, Country, Zip Code
-            </li>
-            <li>
-                <strong>Address 2:</strong>
-                456 Elm St, City, Country, Zip Code
-            </li>
-            <!-- Add more addresses as needed -->
-        </ul>
+      <h2>Shipping Addresses</h2>
+      <ul>
+        <li>
+          <strong>Address 1:</strong>
+          123 Main St, City, Country, Zip Code
+        </li>
+        <li>
+          <strong>Address 2:</strong>
+          456 Elm St, City, Country, Zip Code
+        </li>
+        <!-- Add more addresses as needed -->
+      </ul>
     </section>
 
     <section class="order-history">
-        <h2>Order History</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Date</th>
-                    <th>Total Amount</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2023-09-01</td>
-                    <td>$100.00</td>
-                    <td>Shipped</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>2023-08-25</td>
-                    <td>$75.00</td>
-                    <td>Delivered</td>
-                </tr>
-                <!-- Add more orders as needed -->
-            </tbody>
-        </table>
+      <h2>Order History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Order ID</th>
+            <th>Date</th>
+            <th>Total Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>2023-09-01</td>
+            <td>$100.00</td>
+            <td>Shipped</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>2023-08-25</td>
+            <td>$75.00</td>
+            <td>Delivered</td>
+          </tr>
+          <!-- Add more orders as needed -->
+        </tbody>
+      </table>
     </section>
 
     <section class="coupons">
-        <h2>Coupons</h2>
-        <ul>
-            <li>SAVE10 - Get 10% off your next purchase</li>
-            <li>FREESHIP - Free shipping on orders over $50</li>
-            <!-- Add more coupons as needed -->
-        </ul>
+      <h2>Coupons</h2>
+      <ul>
+        <li>SAVE10 - Get 10% off your next purchase</li>
+        <li>FREESHIP - Free shipping on orders over $50</li>
+        <!-- Add more coupons as needed -->
+      </ul>
     </section>
 
     <section class="cart-wishlist">
-        <h2>Cart / Wishlist</h2>
-        <!-- Display user's cart or wishlist items here -->
+      <h2>Cart / Wishlist</h2>
+      <!-- Display user's cart or wishlist items here -->
     </section>
 
     <%- include('partials/footer') %>
@@ -195,5 +209,5 @@ footer {
     <!-- <footer>
         <p>&copy; 2023 Gift Wala. All rights reserved.</p>
       </footer> -->
-</body>
+  </body>
 </html>

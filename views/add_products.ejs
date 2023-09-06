@@ -2,6 +2,20 @@
 <!-- <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> -->
 <html lang="en-US" class="supernova">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-EDHWHQ1H31");
+    </script>
     <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
     <!-- <link rel="alternate" type="application/json+oembed" href="https://www.jotform.com/oembed/?format=json&amp;url=https%3A%2F%2Fform.jotform.com%2F232343719883464" title="oEmbed Form"> -->
     <!-- <link rel="alternate" type="text/xml+oembed" href="https://www.jotform.com/oembed/?format=xml&amp;url=https%3A%2F%2Fform.jotform.com%2F232343719883464" title="oEmbed Form"> -->
@@ -217,34 +231,9 @@
       } /*PREFERENCES STYLE*/ /*__INSPECT_SEPERATOR__*/
       /* Injected CSS Code */
     </style>
-
-    <!-- <script src="https://cdn03.jotfor.ms/static/prototype.forms.js?3.3.44707" type="text/javascript"></script> -->
-    <!-- <script src="https://cdn01.jotfor.ms/static/jotform.forms.js?3.3.44707" type="text/javascript"></script> -->
-    <!-- <script src="https://cdn02.jotfor.ms/js/vendor/imageinfo.js?v=3.3.44707" type="text/javascript"></script> -->
-    <!-- <script src="https://cdn03.jotfor.ms/js/payments/validategateways.js?v=3.3.44707" type="text/javascript"></script> -->
-    <!-- <script src="https://cdn01.jotfor.ms/s/umd/072e5d0cc1c/for-form-branding-footer.js?v=3.3.44707" type="text/javascript" defer></script> -->
-    <!-- <script type="text/javascript">	JotForm.newDefaultTheme = false;
-	JotForm.extendsNewTheme = false;
-	JotForm.singleProduct = false;
-	JotForm.newPaymentUIForNewCreatedForms = false;
-	JotForm.submitError="jumpToFirstError";
-	window.addEventListener('DOMContentLoaded',function(){window.brandingFooter.init({"formID":232343719883464,"campaign":"powered_by_jotform_le","isCardForm":false,"isLegacyForm":true})});
-	JotForm.init(function(){
-	/*INIT-START*/
-if (window.JotForm && JotForm.accessible) $('input_4').setAttribute('tabindex',0);
-if (window.JotForm && JotForm.accessible) $('input_6').setAttribute('tabindex',0);
-      setTimeout(function() {
-          $('input_8').hint('ex: $5');
-       }, 20);
-	/*INIT-END*/
-	});
-
-   setTimeout(function() {
-JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"Submit a Product","type":"control_head"},{"name":"submit","qid":"2","text":"Submit","type":"control_button"},null,{"name":"productName","qid":"4","text":"Product Name","type":"control_textbox"},null,{"name":"additionalDescription","qid":"6","text":"Additional Description","type":"control_textarea"},{"name":"imageOf","qid":"7","text":"Image of Product","type":"control_fileupload"},{"name":"productPrice","qid":"8","text":"Product Price","type":"control_number"}]);}, 20); 
-</script> -->
   </head>
   <body>
-    <%- include('partials/header') %>
+    <header><%- include('partials/header') %></header>
     <form class="jotform-form" action="/api/add_products" method="POST">
       <input type="hidden" name="formID" value="232343719883464" />
       <!-- <input type="hidden" id="cardinalOrderNumber" value="" /> -->
@@ -298,8 +287,8 @@ JotForm.paymentExtrasOnTheFly([null,{"name":"clickTo","qid":"1","text":"Submit a
                 name="image"
                 class="form-upload"
                 data-imagevalidate="yes"
-                />
-                <!-- data-file-accept="pdf, doc, docx, xls, csv, txt, rtf, html, zip, mp3, wma, mpg, flv, avi, jpg, jpeg, png, gif"
+              />
+              <!-- data-file-accept="pdf, doc, docx, xls, csv, txt, rtf, html, zip, mp3, wma, mpg, flv, avi, jpg, jpeg, png, gif"
                 data-file-maxsize="10240"
                 data-file-minsize="0"
                 data-file-limit="0"
