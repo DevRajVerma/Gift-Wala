@@ -54,8 +54,6 @@ app.get("/", async (req, res) => {
 
     // check if user is logged in, by checking cookie
 
-    
-
     //fetch the data from database
     const response = await Product.find();
     res.render("index", {
@@ -166,7 +164,7 @@ app.get("/api/profile", async (req, res) => {
   res.render("profile", {
     name: title,
     login_status: login_status,
-    usermail : usermail,
+    usermail: usermail,
   });
   // res.render("profile", { name: title, login_status: login_status });
   // res.render("profile");
@@ -198,7 +196,6 @@ app.post("/api/add_products", async (req, res) => {
     });
     await createProduct.save();
     res.status(201).json({ Messgae: createProduct });
-    //  res.redirect("/");
   } catch (err) {
     console.log("Error in creating the Product", err);
     res.status(404).json({ Messgae: "Error in creating Product" });
@@ -396,5 +393,108 @@ app.get("/api/savedproduct", async (req, res) => {
   } catch (err) {
     console.log("Error In Fetching the Products", err);
     res.status(404).json({ message: err });
+  }
+});
+
+app.post("/api/contact", async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({ message: "You are not logged in" });
+    }
+
+    console.log(user);
+
+    // const hashPass = await bcrypt.hash(password, 10);
+    // const newUser = new UserModel({
+    //   name: name,
+    //   email: email,
+    //   password: hashPass,
+    // });
+    // await newUser.save();
+    // res.status(201).json({ user:req.body });
+    console.log("This user is logged in");
+
+    const response = await Product.find();
+
+    var login_status = "LOGIN KAR BRO!";
+    var title = "";
+
+    res.render("index", {
+      details: response,
+      name: title,
+      login_status: login_status,
+    });
+
+    // res.redirect("/login");
+  } catch (err) {
+    res.status(201).json({ message: "Error In Creating user" + err });
+  }
+});
+
+app.post("/addtocart", async (req, res) => {
+  try {
+    const { ProductName } = req.body;
+    let username = req.cookies.username;
+    var email = username;
+
+    const product1 = await Product.findOne({ ProductName });
+
+    const user = await UserModel.findOne({ email });
+
+    // if (!user) {
+    //   return res.status(401).json({ message: "Invalid credentials" });
+    // }
+
+    if (product1) {
+      var cake = product1;
+      console.log(cake);
+
+      user.productArray.push({
+        cake,
+
+
+
+      });
+
+      await UserModel.save();
+
+      console.log(user.productArray);
+      // return res.status(200).json({ message: 'Item added to cart successfully' });
+
+    } else{
+      return res.status(404).json({ message: 'Product not available' });
+
+    }
+
+    if (user) {
+      var title = user.name;
+      var login_status = "";
+
+      
+      console.log(username);
+      console.log();
+
+
+    } else {
+      var title = "----->login----->";
+      var login_status = "Login";
+    }
+
+    // check if user is logged in, by checking cookie
+
+    //fetch the data from database
+    const response = await Product.find();
+    res.render("index", {
+      details: response,
+      name: title,
+      login_status: login_status,
+      username,
+    });
+  } catch (err) {
+    res.status(201).json({ message: "Error In Creating user" + err });
   }
 });

@@ -67,8 +67,12 @@
 
 
        <% for (var i =20; i <details.length;  i++ ) { %>
+
+        <form action="/addtocart" method="POST">
             <section class="product">
                 <!-- <img src="product1.jpg" alt="Gift 1" /> -->
+                <input type="hidden" name="ProductName" value="<%= details[i].ProductName%>">
+
                 <h2><%= details[i].ProductName%></h2>
                
                 <img src="<%= details[i].ImageUrl %>" alt="image-url">
@@ -78,8 +82,10 @@
             <p><%= details[i].Desription %></p>
             <% */ %>
                  
-                <button>Add to Cart</button>
+                <button type="submit">Add to Cart</button>
               </section>
+
+            </form>
             <%#  will output the numbers 1-10 %>
             <% } %>
 

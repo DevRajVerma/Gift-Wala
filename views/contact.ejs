@@ -453,7 +453,7 @@ form {
       -------------------------------------------------------------
       ------------------------------------------------------------>
         
-        <form>
+        <form action="/api/contact" method="POST">
             <h1 class="title text-center mb-4">Talk to Us</h1>
     
                 <!-- Name -->
@@ -461,7 +461,7 @@ form {
                     <label for="formName" class="d-block">
                         <i class="icon" data-feather="user"></i>
                     </label>
-                    <input type="text" id="formName" class="form-control form-control-lg thick" placeholder="Name">
+                    <input type="text" id="formName" class="form-control form-control-lg thick" placeholder="Name" name="name">
                 </div>
     
                 <!-- E-mail -->
@@ -469,17 +469,17 @@ form {
                     <label for="formEmail" class="d-block">
                         <i class="icon" data-feather="mail"></i>
                     </label>
-                    <input type="email" id="formEmail" class="form-control form-control-lg thick" placeholder="E-mail">
+                    <input type="email" id="formEmail" class="form-control form-control-lg thick" placeholder="E-mail" name="email">
                 </div>
     
                 <!-- Message -->
                 <div class="form-group message">
-                    <textarea id="formMessage" class="form-control form-control-lg" rows="7" placeholder="Mensagem"></textarea>
+                    <textarea id="formMessage" class="form-control form-control-lg" rows="7" placeholder="Mensagem" name="message"></textarea>
                 </div>
             
                 <!-- Submit btn -->
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary" tabIndex="-1">Send message</button>
+                    <button type="submit" class="btn btn-primary" tabIndex="-1" name="signup_submit">Send message</button>
                 </div>
         </form>
 
@@ -495,9 +495,9 @@ form {
     <br>
     
 
-    <script>
+    <!-- <script>
         feather.replace();
-    </script>
+    </script> -->
 
     <div>
         <%- include('partials/footer') %>

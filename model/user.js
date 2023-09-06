@@ -16,7 +16,10 @@ const userSchema = new mongoose.Schema({
     productArray:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Product',
-    }]
+    }],
+    message:{
+        type:String,
+      },
 });
 
 const UserModel = mongoose.model('User',userSchema);
