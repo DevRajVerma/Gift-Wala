@@ -2,6 +2,7 @@ const express = require("express");
 // const path = require('path');
 const session = require("express-session");
 const flash = require("connect-flash");
+var nodemailer = require('nodemailer');
 const bcrypt = require("bcrypt");
 const cookieparser = require("cookie-parser");
 
@@ -117,10 +118,6 @@ app.get("/login", (req, res) => {
       login_status: login_status,
     });
   }
-});
-
-app.get("/cart", (req, res) => {
-  res.render("cart");
 });
 
 app.get("/contact", (req, res) => {
@@ -274,6 +271,7 @@ app.get("/api/signup", function (req, res) {
 app.get("/profile", async (req, res) => {
   let username = req.cookies.username;
   var email = username;
+  var usermail = email;
 
   const user = await UserModel.findOne({ email });
 
@@ -287,6 +285,7 @@ app.get("/profile", async (req, res) => {
   res.render("profile", {
     name: title,
     login_status: login_status,
+    usermail: usermail,
   });
   res.render("profile", { name: title, login_status: login_status });
   // res.render("profile");
@@ -319,7 +318,7 @@ app.post("/api/login", async (req, res) => {
 
     // Generate a JWT and send it to the frontend
     // const token = generateAuthToken(user);
-    console.log(user);
+    // console.log(user);
 
     var login_status = "";
     var title = user.name;
@@ -347,10 +346,6 @@ app.get("/welcome", (req, res) => {
   return res.render("welcome", {
     username,
   });
-});
-
-server.listen(3000, function () {
-  console.log("Server listening on port: 3000");
 });
 
 //Database Code by Ankush Mehra
@@ -449,36 +444,28 @@ app.post("/addtocart", async (req, res) => {
     //   return res.status(401).json({ message: "Invalid credentials" });
     // }
 
-    if (product1) {
-      var cake = product1;
-      console.log(cake);
-
-      user.productArray.push({
-        cake,
-
-
-
-      });
-
-      await UserModel.save();
-
-      console.log(user.productArray);
-      // return res.status(200).json({ message: 'Item added to cart successfully' });
-
-    } else{
-      return res.status(404).json({ message: 'Product not available' });
-
-    }
-
     if (user) {
       var title = user.name;
       var login_status = "";
 
-      
-      console.log(username);
-      console.log();
+      // console.log(username);
+      // console.log();
 
+      if (product1) {
+        var Id = product1._id;
+        
 
+        user.productArray.push(product1);
+
+        await user.save();
+
+        // console.log(user.productArray);
+        return res
+          .status(200)
+          .json({ message: "Item added to cart successfully" });
+      } else {
+        return res.status(404).json({ message: "Product not available" });
+      }
     } else {
       var title = "----->login----->";
       var login_status = "Login";
@@ -495,6 +482,137 @@ app.post("/addtocart", async (req, res) => {
       username,
     });
   } catch (err) {
-    res.status(201).json({ message: "Error In Creating user" + err });
+    res.status(201).json({ message: "Error In Adding item to cart" + err });
   }
+});
+
+app.get("/api/cart", async (req, res) => {
+  let username = req.cookies.username;
+  var email = username;
+
+  const user = await UserModel.findOne({ email });
+
+  if (user) {
+    var title = user.name;
+    var login_status = "";
+
+    var savedproducts = user.productArray;
+
+    var size = savedproducts.length;
+
+    console.log(size);
+
+    var display = new Array();
+    //fetch the data from database
+    // const response = await Product.find();
+
+    for (let i = 0; i < size; i++) {
+      var _id = savedproducts[i];
+      
+
+      const product = await Product.findOne({ _id });
+      display.push(product);
+
+      
+    }
+
+    
+
+   
+
+    res.render("cart", {
+      display: display,
+      name: title,
+      login_status: login_status,
+
+    });
+
+    //fetch the data from database
+    // const response = await Product.find();
+
+    // for (let i = 0; i < array.length; i++) {
+    //   const element = array[i];
+
+    // }
+
+    // res.render("cart", {
+    //   details: response,
+    //   name: title,
+    //   login_status: login_status,
+
+    // });
+
+
+  } else {
+    var title = "";
+    var login_status = "";
+
+    res.render("login", {
+      name: title,
+      login_status: login_status,
+    });
+  }
+
+  // res.render("cart");
+});
+
+app.get("/cart", async (req, res) => {
+  let username = req.cookies.username;
+  var email = username;
+
+  const user = await UserModel.findOne({ email });
+
+  if (user) {
+    var title = user.name;
+    var login_status = "";
+
+    var savedproducts = user.productArray;
+
+    var size = savedproducts.length;
+
+    console.log(size);
+
+    var display = new Array(size);
+    //fetch the data from database
+    // const response = await Product.find();
+
+    for (let i = 0; i < size; i++) {
+      var _id = savedproducts[i];
+      // console.log(cake._id);
+
+      // user.productArray.push(product1);
+
+      // let _id = savedproducts[i];
+
+      const product = await Product.findOne({ _id });
+      display.push(product);
+
+      // console.log(display[i].ProductName);
+    }
+
+    // console.log(display[0].ProductName);
+    // console.log(display);
+
+    // res.render("cart", {
+    //   details: display,
+    //   name: title,
+    //   login_status: login_status,
+
+    // });
+
+  } else {
+    var title = "";
+    var login_status = "";
+
+    res.render("login", {
+      name: title,
+      login_status: login_status,
+    });
+  }
+
+  // res.render("cart");
+});
+
+server.listen(3000, function () {
+  console.log("Server listening on port: 3000");
 });

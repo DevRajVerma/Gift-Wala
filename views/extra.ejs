@@ -1,9 +1,32 @@
 <div class="welcome">
-
-    <%if(locals.username){%>
-    <p>You are logged in as <%=username%></p>
-    <a href="/logout">Logout</a>
-    <%} else { %>
-    <a href="/login">Login</a>
-    <% } %>
+  <%if(locals.username){%>
+  <p>You are logged in as <%=username%></p>
+  <a href="/logout">Logout</a>
+  <%} else { %>
+  <a href="/login">Login</a>
+  <% } %>
 </div>
+
+<h2><%= details[i].ProductName%></h2>
+
+<img src="<%= details[i].ImageUrl %>" alt="image-url" />
+<p>₹<%= details[i].Price %></p>
+
+
+<% for (var i =0; i <(details.length); i++ ) { %>
+
+<section class="product">
+  <!-- <img src="product1.jpg" alt="Gift 1" /> -->
+
+  <h2><%= details%></h2>
+
+  <p><%= details.ProductName %></p>
+</section>
+
+<%# will output the numbers 1-10 %> <% } %>
+
+
+<% for (var i =0; i <(display.length); i++ ) { %>
+
+
+    <% } %>

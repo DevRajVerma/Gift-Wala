@@ -18,7 +18,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="CodeHim" />
-    <title>Update Quantity Shopping Cart Example</title>
+    <title>Contact</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 
     <!-- Style CSS -->
@@ -174,14 +174,15 @@
   </head>
 
   <body>
-    <%- include('partials/header') %>
+    <header><%- include('partials/header') %></header>
+
     <div class="container d-flex justify-content-center align-items-center">
       <!-- // SVG
                         from: https://www.freepik.com/free-vector/new-message-concept-landing-page_5777076.htm 
       -------------------------------------------------------------
       -- Note: need to use inline svg to manipulate its components
       ------------------------------------------------------------>
-
+      <!-- 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 790 563" fill="none">
         <g id="Image">
           <g id="g14">
@@ -934,11 +935,15 @@
             </g>
           </g>
         </g>
-      </svg>
+      </svg> -->
 
       <!-- // FORM
       -------------------------------------------------------------
       ------------------------------------------------------------>
+
+      <br />
+      <br />
+      <br />
 
       <form action="/api/contact" method="POST">
         <h1 class="title text-center mb-4">Talk to Us</h1>
@@ -995,17 +1000,6 @@
         </div>
       </form>
     </div>
-
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-
-    <!-- <script>
-        feather.replace();
-    </script> -->
 
     <div><%- include('partials/footer') %></div>
   </body>
