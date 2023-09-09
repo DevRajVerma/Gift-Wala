@@ -98,6 +98,12 @@ app.get("/signup", (req, res) => {
   res.render("signup", { name: title, login_status: login_status });
 });
 
+app.get("/about", (req, res) => {
+  var title = " ";
+  var login_status = "";
+  res.render("about", { name: title, login_status: login_status });
+});
+
 app.get("/login", (req, res) => {
   // check if there is a msg query
   let bad_auth = req.query.msg ? true : false;
