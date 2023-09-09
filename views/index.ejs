@@ -31,9 +31,11 @@
         </div>
         <div class="top-icons">
           <!-- <a href="signup"><button class="signup-button">Sign up</button></a> -->
+          
           <h3 style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"><%= name %></h3>
       
           <a href="cart"><button class="cart-button">Cart</button></a>
+
           <a href="login"><button class="login-button"><%= login_status %></button></a>
           <a href="profile"><button class="profile-button">Profile</button></a>
           
@@ -64,10 +66,10 @@
       <!-- ... (remaining HTML code) ... -->
       
       <div class="bottom-header" style="width: 30%; padding-bottom: 0px; padding-top: 9px;">
-        <div class="search-bar" style="align-items: flex-start ; width: 700px; height: 68; padding-top: 7px;">
+        <!-- <div class="search-bar" style="align-items: flex-start ; width: 700px; height: 68; padding-top: 7px;">
           <input type="text" placeholder="Search for products..."
           style="padding-bottom: 14px; padding-top: 14px; width: 60%;" />
-        </div>
+        </div> -->
       </div>
       
       
@@ -86,14 +88,16 @@
                 <h2><%= details[i].ProductName%></h2>
                
                 <img src="<%= details[i].ImageUrl %>" alt="image-url">
-                <p>₹<%= details[i].Price %></p>
 
-                <% /* %>
-            <p><%= details[i].Desription %></p>
-            <% */ %>
+                <p class="demo<% i %>"></p>
+                <p >₹<%= details[i].Price %></p>
                  
-                <button type="submit">Add to Cart</button>
+                <button class="myBtn<% i %>" type="submit">Add to Cart</button>
+            
               </section>
+
+              
+              
 
             </form>
             <%#  will output the numbers 1-10 %>
@@ -112,6 +116,17 @@
 
     <script>
       document.cookie = 'dark_mode=true; path=/Ankit; Secure;';
+      
+
+        const element = document.getElementsByClassName("myBtn");
+
+        element.addEventListener("click", myFunction);
+
+        function myFunction(){
+          document.getElementsByClassName("demo").innerHTML = "Added 👍"
+        }
+  
+
     </script>
   </body>
 </html>

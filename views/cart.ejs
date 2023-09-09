@@ -22,19 +22,29 @@
     <main>
       
 
-      <section class="product">
+      <!-- <section class="product"> -->
         <!-- <img src="product1.jpg" alt="Gift 1" /> -->
 
         <% display.forEach((item)=>{%>
 
+          <% for (var i =0; i <1;  i++ ) { %>
 
+            <section class="product">
+          <!-- <section class="product"></section> -->
         <h2><%= item.ProductName %></h2>
         <img src="<%= item.ImageUrl %>" alt="image-url" />
         <p>₹<%= item.Price %></p>
+
+      </section>
+
+        <% } %>
+
         <%})%>
 
+      <!-- </section> -->
+
         
-      </section>
+      <!-- </section> -->
 
       
     </main>
