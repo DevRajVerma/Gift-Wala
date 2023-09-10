@@ -16,10 +16,40 @@
     <link rel="stylesheet" href="/styles.css" type="text/css"/>
     <title>Gift Wala</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+
+    <style>
+      /* Style the header */
+/* .header {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+} */
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the header with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 102px;
+}
+    </style>
   </head>
 
   <body>
-    <header class="main-header">
+
+    <div class="header" id="myHeader">
+  
+
+    <div class="main-header">
       <!-- ... (previous HTML code) ... -->
       <div class="top-header">
         <div class="logo-name">
@@ -32,6 +62,7 @@
         <div class="top-icons">
           <!-- <a href="signup"><button class="signup-button">Sign up</button></a> -->
           
+          <p class="demo"></p>
           <h3 style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"><%= name %></h3>
       
           <a href="cart"><button class="cart-button">Cart</button></a>
@@ -64,17 +95,12 @@
         </div>
       </div>
       
-      <!-- ... (remaining HTML code) ... -->
-      
-      <div class="bottom-header" style="width: 30%; padding-bottom: 0px; padding-top: 9px;">
-        <!-- <div class="search-bar" style="align-items: flex-start ; width: 700px; height: 68; padding-top: 7px;">
-          <input type="text" placeholder="Search for products..."
-          style="padding-bottom: 14px; padding-top: 14px; width: 60%;" />
-        </div> -->
-      </div>
       
       
-    </header>
+      
+    </div>
+
+    </div>
 
     <main>
 
@@ -90,10 +116,10 @@
                
                 <img src="<%= details[i].ImageUrl %>" alt="image-url">
 
-                <p class="demo<% i %>"></p>
+                
                 <p >₹<%= details[i].Price %></p>
                  
-                <button class="myBtn<% i %>" type="submit">Add to Cart</button>
+                <button class="myBtn" type="submit" onclick="myFunction(2)" >Add to Cart</button>
             
               </section>
 
@@ -115,19 +141,46 @@
       <p>&copy; 2023 Gift Wala. All rights reserved.</p>
     </footer>
 
-    <script>
-      document.cookie = 'dark_mode=true; path=/Ankit; Secure;';
-      
+    
 
-        const element = document.getElementsByClassName("myBtn");
+    
 
-        element.addEventListener("click", myFunction);
-
-        function myFunction(){
-          document.getElementsByClassName("demo").innerHTML = "Added 👍"
-        }
+<script>
+  document.cookie = 'dark_mode=true; path=/Ankit; Secure;';
   
 
-    </script>
+    const element = document.querySelectorAll(".myBtn");
+
+    // console.log(element);
+    element.addEventListener("click", myFunction);
+
+    function myFunction(id){
+      document.querySelector(".demo").innerHTML = "Added 👍"
+    }
+
+    
+
+</script>
+
+<script>
+  // When the user scrolls the page, execute myFunction
+window.onscroll = function() {myFunction()};
+
+// Get the header
+var header = document.getElementById("myHeader");
+
+// Get the offset position of the navbar
+var sticky = header.offsetTop;
+
+// Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+function myFunction() {
+if (window.pageYOffset > sticky) {
+header.classList.add("sticky");
+} else {
+header.classList.remove("sticky");
+}
+}
+
+</script>
   </body>
 </html>
