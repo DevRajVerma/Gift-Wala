@@ -119,7 +119,7 @@
                 
                 <p >₹<%= details[i].Price %></p>
                  
-                <button class="myBtn" type="submit" onclick="myFunction(2)" >Add to Cart</button>
+                <button class="myBtn" type="submit" onclick="meraFunction(2)" >Add to Cart</button>
             
               </section>
 
@@ -149,14 +149,14 @@
   document.cookie = 'dark_mode=true; path=/Ankit; Secure;';
   
 
-    const element = document.querySelectorAll(".myBtn");
+  const element = document.querySelectorAll(".myBtn");
 
-    // console.log(element);
-    element.addEventListener("click", myFunction);
+  // console.log(element);
+  element.addEventListener("click", meraFunction);
 
-    function myFunction(id){
-      document.querySelector(".demo").innerHTML = "Added 👍"
-    }
+  function meraFunction(id){
+    document.querySelector(".demo").innerHTML = "Added 👍"
+  }
 
     
 
