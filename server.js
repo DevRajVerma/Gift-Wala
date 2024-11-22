@@ -26,7 +26,7 @@ ConnectDB();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieparser());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, 'public')));
 app.set("view engine", "ejs");
 
 app.use(flash());
