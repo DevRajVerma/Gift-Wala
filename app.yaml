@@ -1,6 +1,0 @@
-#google cloud
-
-#start app.yaml
-
-runtime: nodejs
-env : flex
