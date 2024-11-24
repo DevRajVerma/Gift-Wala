@@ -177,7 +177,7 @@ app.get("/api/add_products", (req, res) => {
   var title = " ";
   var login_status = "";
   res.render("add_products", { name: title, login_status: login_status });
-});
+})
 
 app.get("/checkout", (req, res) => {
   res.render("checkout");
