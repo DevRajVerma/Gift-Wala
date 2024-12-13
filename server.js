@@ -489,48 +489,69 @@ app.post("/addtocart", async (req, res) => {
 });
 
 app.get("/api/cart", async (req, res) => {
-  let username = req.cookies.username;
-  var email = username;
+  try {
+    const username = req.cookies.username;
+    const email = username;
 
-  const user = await UserModel.findOne({ email });
+    // const user = await UserModel.findOne({ email });
+    // Use projection to only get needed fields
+    const user = await UserModel.findOne(
+      { email },
+      { name: 1, productArray: 1 }
+    );
 
-  if (user) {
-    var title = user.name;
-    var login_status = "";
-
-    var savedproducts = user.productArray;
-
-    var size = savedproducts.length;
-
-    // console.log(size);
-
-    var display = new Array();
-    //fetch the data from database
-    // const response = await Product.find();
-
-    for (let i = 0; i < size; i++) {
-      var _id = savedproducts[i];
-
-      const product = await Product.findOne({ _id });
-      display.push(product);
+    if (!user) {
+      return res.render("login", {
+        name: "",
+        login_status: "",
+      });
     }
 
+    // Use a single query instead of multiple queries
+    const products = await Product.find({ _id: { $in: user.productArray } });
+
     res.render("cart", {
-      display: display,
-      name: title,
-      login_status: login_status,
+      display: products,
+      name: user.name,
+      login_status: "",
     });
-  } else {
-    var title = "";
-    var login_status = "";
 
-    res.render("login", {
-      name: title,
-      login_status: login_status,
-    });
+    // if (user) {
+    //   var title = user.name;
+    //   var login_status = "";
+
+    //   var savedproducts = user.productArray;
+
+    //   var size = savedproducts.length;
+
+    //   var display = new Array();
+
+    //   for (let i = 0; i < size; i++) {
+    //     var _id = savedproducts[i];
+
+    //     const product = await Product.findOne({ _id });
+    //     display.push(product);
+    //   }
+
+    //   res.render("cart", {
+    //     display: display,
+    //     name: title,
+    //     login_status: login_status,
+    //   });
+
+    // } else {
+    //   var title = "";
+    //   var login_status = "";
+
+    //   res.render("login", {
+    //     name: title,
+    //     login_status: login_status,
+    //   });
+    // }
+  } catch (error) {
+    console.error("Cart error:", error);
+    res.status(500).send("Error loading cart");
   }
-
-  // res.render("cart");
 });
 
 app.get("/cart", async (req, res) => {
