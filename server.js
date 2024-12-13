@@ -26,7 +26,7 @@ ConnectDB();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieparser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
 app.use(flash());
@@ -177,7 +177,7 @@ app.get("/api/add_products", (req, res) => {
   var title = " ";
   var login_status = "";
   res.render("add_products", { name: title, login_status: login_status });
-})
+});
 
 app.get("/checkout", (req, res) => {
   res.render("checkout");
@@ -463,17 +463,10 @@ app.post("/addtocart", async (req, res) => {
         user.productArray.push(product1);
 
         await user.save();
-
-        // console.log(user.productArray);
-        // return res
-        //   .status(200)
-        //   .json({ message: "Item added to cart successfully" });
       } else {
         return res.status(404).json({ message: "Product not available" });
       }
-    } 
-    
-    else {
+    } else {
       var title = "PLEASE LOGIN FIRST----->login----->----->login----->";
       var login_status = "Login";
     }
@@ -490,8 +483,6 @@ app.post("/addtocart", async (req, res) => {
     });
 
     // console.log("Product Added Successfully");
-    
-
   } catch (err) {
     res.status(201).json({ message: "Error In Adding item to cart" + err });
   }
@@ -529,8 +520,6 @@ app.get("/api/cart", async (req, res) => {
       name: title,
       login_status: login_status,
     });
-
-    
   } else {
     var title = "";
     var login_status = "";
@@ -545,50 +534,69 @@ app.get("/api/cart", async (req, res) => {
 });
 
 app.get("/cart", async (req, res) => {
-  let username = req.cookies.username;
-  var email = username;
+  try {
+    const username = req.cookies.username;
+    const email = username;
 
-  const user = await UserModel.findOne({ email });
+    // const user = await UserModel.findOne({ email });
+    // Use projection to only get needed fields
+    const user = await UserModel.findOne(
+      { email },
+      { name: 1, productArray: 1 }
+    );
 
-  if (user) {
-    var title = user.name;
-    var login_status = "";
-
-    var savedproducts = user.productArray;
-
-    var size = savedproducts.length;
-
-    // console.log(size);
-
-    var display = new Array();
-    //fetch the data from database
-    // const response = await Product.find();
-
-    for (let i = 0; i < size; i++) {
-      var _id = savedproducts[i];
-
-      const product = await Product.findOne({ _id });
-      display.push(product);
+    if (!user) {
+      return res.render("login", {
+        name: "",
+        login_status: "",
+      });
     }
 
+    // Use a single query instead of multiple queries
+    const products = await Product.find({ _id: { $in: user.productArray } });
+
     res.render("cart", {
-      display: display,
-      name: title,
-      login_status: login_status,
+      display: products,
+      name: user.name,
+      login_status: "",
     });
 
-   
-  } else {
-    var title = "";
-    var login_status = "";
+    // if (user) {
+    //   var title = user.name;
+    //   var login_status = "";
 
-    res.render("login", {
-      name: title,
-      login_status: login_status,
-    });
+    //   var savedproducts = user.productArray;
+
+    //   var size = savedproducts.length;
+
+    //   var display = new Array();
+
+    //   for (let i = 0; i < size; i++) {
+    //     var _id = savedproducts[i];
+
+    //     const product = await Product.findOne({ _id });
+    //     display.push(product);
+    //   }
+
+    //   res.render("cart", {
+    //     display: display,
+    //     name: title,
+    //     login_status: login_status,
+    //   });
+
+    // } else {
+    //   var title = "";
+    //   var login_status = "";
+
+    //   res.render("login", {
+    //     name: title,
+    //     login_status: login_status,
+    //   });
+    // }
+  } catch (error) {
+    console.error("Cart error:", error);
+    res.status(500).send("Error loading cart");
   }
-
-  // res.render("cart");
 });
 
 server.listen(3000, function () {
