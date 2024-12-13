@@ -36,10 +36,29 @@ app.set("views", path.join(__dirname, "views"));
 
 app.get("/", async (req, res) => {
   try {
-    let username = req.cookies.username;
-    var email = username;
 
-    const user = await UserModel.findOne({ email });
+    // Parallel execution of database queries
+    const [user, products] = await Promise.all([
+      // Only fetch needed fields from user
+      UserModel.findOne(
+        { email: req.cookies.username }, 
+        { name: 1, _id: 0 }
+      ),
+      // Add projection to only get needed product fields
+      // Product.find({}, { 
+      //   // Add fields you actually need in your template
+      //   name: 1, 
+      //   price: 1, 
+      //   description: 1,
+      //   // etc...
+      // })
+      Product.find()
+    ]);
+
+    let username = req.cookies.username;
+    // var email = username;
+
+    // const user = await UserModel.findOne({ email });
 
     // if (!user) {
     //   return res.status(401).json({ message: "Invalid credentials" });
@@ -56,15 +75,20 @@ app.get("/", async (req, res) => {
     // check if user is logged in, by checking cookie
 
     //fetch the data from database
-    const response = await Product.find();
+    // const response = await Product.find();
     res.render("index", {
-      details: response,
+      details: products,
       name: title,
       login_status: login_status,
-      username,
+      username: req.cookies.username,
     });
   } catch (err) {
-    console.log("Error in getting the products");
+    console.log("Error loading homepage:", err);
+    res.status(500).render("error", {
+      message: "Failed to load homepage",
+      name: "",
+      login_status: "Login"
+     });
   }
 });
 
