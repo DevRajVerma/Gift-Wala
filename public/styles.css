@@ -52,6 +52,14 @@ main {
   gap: 20px;
 }
 
+/* This class is handling everything for header, because of so high z-index, no element will appear over our header, position: fixed making it fixed from viewport i.e. from the user's point of view, top: 0 is keeping it at top */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
 /* Style for the product cards */
 .product {
   border: 1px solid #ddd;

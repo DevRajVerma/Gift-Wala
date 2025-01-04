@@ -133,76 +133,79 @@
     </style>
   </head>
   <body>
-    <header><%- include('partials/header') %></header>
+  <%- include('partials/header') %>
 
     <!-- <header>
         <h1>Your Profile</h1>
         <a href="logout.php">Logout</a>
     </header> -->
 
-    <section class="user-info">
-      <h2>Personal Information</h2>
-      <p>Name: <%= name %></p>
-      <p>Email: <%= usermail %></p>
-    </section>
+    <div style="padding-top: 110px;">
+      <section class="user-info">
+        <h2>Personal Information</h2>
+        <p>Name: <%= name %></p>
+        <p>Email: <%= usermail %></p>
+      </section>
+  
+      <section class="shipping-addresses">
+        <h2>Shipping Addresses</h2>
+        <ul>
+          <li>
+            <strong>Address 1:</strong>
+            
+          </li>
+          <li>
+            <strong>Address 2:</strong>
+            
+          </li>
+          <!-- Add more addresses as needed -->
+        </ul>
+      </section>
+  
+      <section class="order-history">
+        <h2>Order History</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Date</th>
+              <th>Total Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <!-- Add more orders as needed -->
+          </tbody>
+        </table>
+      </section>
+  
+      <section class="coupons">
+        <h2>Coupons</h2>
+        <ul>
+          <li>SAVE10 - Get 10% off your next purchase</li>
+          <li>FREESHIP - Free shipping on orders over $50</li>
+          <!-- Add more coupons as needed -->
+        </ul>
+      </section>
+  
+      <section class="cart-wishlist">
+        <h2>Cart / Wishlist</h2>
+        <!-- Display user's cart or wishlist items here -->
+      </section>
 
-    <section class="shipping-addresses">
-      <h2>Shipping Addresses</h2>
-      <ul>
-        <li>
-          <strong>Address 1:</strong>
-          
-        </li>
-        <li>
-          <strong>Address 2:</strong>
-          
-        </li>
-        <!-- Add more addresses as needed -->
-      </ul>
-    </section>
-
-    <section class="order-history">
-      <h2>Order History</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Date</th>
-            <th>Total Amount</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <!-- Add more orders as needed -->
-        </tbody>
-      </table>
-    </section>
-
-    <section class="coupons">
-      <h2>Coupons</h2>
-      <ul>
-        <li>SAVE10 - Get 10% off your next purchase</li>
-        <li>FREESHIP - Free shipping on orders over $50</li>
-        <!-- Add more coupons as needed -->
-      </ul>
-    </section>
-
-    <section class="cart-wishlist">
-      <h2>Cart / Wishlist</h2>
-      <!-- Display user's cart or wishlist items here -->
-    </section>
+    </div>
 
     <%- include('partials/footer') %>
 

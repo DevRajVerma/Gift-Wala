@@ -251,7 +251,7 @@ app.post("/api/signup", async (req, res) => {
     const response = await Product.find();
 
     var login_status = "Login";
-    var title = "PLEASE LOGIN FIRST----->login----->----->login----->";
+    var title = "PLEASE LOGIN FIRST----->----->";
 
     res.render("index", {
       details: response,
@@ -491,7 +491,7 @@ app.post("/addtocart", async (req, res) => {
         return res.status(404).json({ message: "Product not available" });
       }
     } else {
-      var title = "PLEASE LOGIN FIRST----->login----->----->login----->";
+      var title = "PLEASE LOGIN FIRST----->----->";
       var login_status = "Login";
     }
 

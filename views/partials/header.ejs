@@ -1,53 +1,58 @@
-<div class="top-header">
-  <div class="logo-name">
-    <a href="/">
-      <img src="/images/logo.png" alt="Gift Shop Logo" />
-    </a>
 
+
+<!-- ... (remaining HTML code) ... -->
+
+<div class="header sticky" id="myHeader">
+  <div class="main-header">
+    <div class="top-header">
+      <div class="logo-name">
+        <a href="/">
+          <img src="/images/logo.png" alt="Gift Shop Logo" />
+        </a>
     
-      <a href="/">
-        <p style="color: white">Gift Wala</p></a>
-   
-  </div>
-  <div class="top-icons">
-    <!-- <a href="signup"><button class="signup-button">Sign up</button></a> -->
-    <h3
-      contenteditable="true"
-      style="
-        font-family: sans-serif;
-        text-align: center;
-        color: rgb(255, 255, 255);
-      "
-    >
-      <%= name %>
-    </h3>
-
-    <a href="cart"><button class="cart-button">Cart</button></a>
-    <a href="login"
-      ><button class="login-button"><%= login_status %></button></a
-    >
-    <!-- <a href="profile"><button class="profile-button">Profile</button></a> -->
-
-    <div class="menu-dropdown">
-      <button class="menu-button">
-        <img
-          style="width: 12.734px; height: 25px"
-          src="/images/kebab-menu.png"
-          alt="kebab-menu"
-        />
-        <!-- <img src="kebab.png" alt="menu" style="max-width: 10%;  
-                  height: auto;  "> -->
-      </button>
-
-      <div class="dropdown-content">
-        <!-- <a href="/">Home</a> -->
-        <!-- <a href="#">Products</a> -->
-        <!-- <a href="contact">Contact</a> -->
-        <!-- <a href="add_products">Add to Products</a> -->
-        <!-- <a href="products">Products</a> -->
+        <a href="/" style="text-decoration: none">
+          <p style="color: white; margin: 0">Gift Wala</p>
+        </a>
+      </div>
+      <div class="top-icons">
+      
+        <h3
+          contenteditable="true"
+          style="
+            font-family: sans-serif;
+            text-align: center;
+            color: rgb(255, 255, 255);
+          "
+        > 
+          <%= name %>
+        </h3>
+    
+        <a href="cart"><button class="cart-button">Cart</button></a>
+        <a href="login"
+          ><button class="login-button"><%= login_status %></button></a
+        >
+        <!-- <a href="profile"><button class="profile-button">Profile</button></a> -->
+    
+        <div class="menu-dropdown">
+          <button class="menu-button">
+            <img
+              style="width: 12.734px; height: 25px"
+              src="/images/kebab-menu.png"
+              alt="kebab-menu"
+            />
+            <!-- <img src="kebab.png" alt="menu" style="max-width: 10%;  
+                      height: auto;  "> -->
+          </button>
+    
+          <div class="dropdown-content">
+            <!-- <a href="/">Home</a> -->
+            <!-- <a href="#">Products</a> -->
+            <!-- <a href="contact">Contact</a> -->
+            <!-- <a href="add_products">Add to Products</a> -->
+            <!-- <a href="products">Products</a> -->
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<!-- ... (remaining HTML code) ... -->

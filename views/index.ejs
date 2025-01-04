@@ -3,6 +3,8 @@
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <!-- Google tag (gtag.js) -->
+     <!-- This is the code for integrating Google tag for google analytics, don't mess with it -->
+     
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -18,12 +20,7 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
 
     <style>
-      /* Style the header */
-/* .header {
-  padding: 10px 16px;
-  background: #555;
-  color: #f1f1f1;
-} */
+      
 
 /* Page content */
 .content {
@@ -45,8 +42,9 @@
   </head>
 
   <body>
-
-    <div class="header" id="myHeader">
+    
+    <!--This is the   -->
+    <div class="header sticky" id="myHeader">
   
 
     <div class="main-header">
@@ -56,11 +54,13 @@
           <a href="/">
             <img src="/images/logo.png" alt="Gift Shop Logo" />
           </a>
-      
-          <p style="color: white;">Gift Wala</p>
+          
+          <a href="/"
+          style="text-decoration: none;"> <p style="color: white; margin: 0;">Gift Wala</p> </a>
+          
         </div>
         <div class="top-icons">
-          <!-- <a href="signup"><button class="signup-button">Sign up</button></a> -->
+              
           
           <p class="demo"></p>
           <h3 style="font-family:sans-serif; text-align:center; color:rgb(255, 255, 255);"><%= name %></h3>
@@ -102,7 +102,7 @@
 
     </div>
 
-    <main>
+    <main style="padding-top: 120px;">
 
 
        <% for (var i =20; i <details.length;  i++ ) { %>
@@ -164,7 +164,7 @@
 
 <script>
   // When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
+// window.onscroll = function() {myFunction()};
 
 // Get the header
 var header = document.getElementById("myHeader");
@@ -174,6 +174,7 @@ var sticky = header.offsetTop;
 
 // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
 function myFunction() {
+ 
 if (window.pageYOffset > sticky) {
 header.classList.add("sticky");
 } else {
