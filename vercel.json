@@ -1,24 +1,25 @@
- {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/server.js"
-      },
-      {
-        "src": "/public/(.*)",
-        "dest": "/$1"
-      }
-    ],
-    "env": {
-      "NODE_ENV": "production",
-      "MONGODB_URI": "mongodb+srv://drverma2704:AavYzM7b818uX6uH@giftwala.x1ywjoh.mongodb.net/GiftWalaretryWrites=true&w=majority"
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server.js",
+      "use": "@vercel/node"
     }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/public/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "MONGODB_URI": "mongodb+srv://drverma2704:AavYzM7b818uX6uH@giftwala.x1ywjoh.mongodb.net/GiftWalaretryWrites=true&w=majority",
+    "RAZORPAY_KEY_ID": "rzp_test_eJh9smTqP5g7gp",
+    "RAZORPAY_KEY_SECRET": "dNkdy0OspoqUU3XCoiTU2Lu8"
   }
-  
+}
