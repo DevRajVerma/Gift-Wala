@@ -8,6 +8,8 @@ const cookieparser = require("cookie-parser");
 
 const app = express();
 
+const Razorpay = require("razorpay");
+
 const UserModel = require("./model/user.js");
 const Product = require("./model/product.js");
 
@@ -24,6 +26,11 @@ const ConnectDB = require("./db");
 const { log } = require("console");
 ConnectDB();
 
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieparser());
 app.use(express.static(path.join(__dirname, "public")));
@@ -36,33 +43,15 @@ app.set("views", path.join(__dirname, "views"));
 
 app.get("/", async (req, res) => {
   try {
-
     // Parallel execution of database queries
     const [user, products] = await Promise.all([
       // Only fetch needed fields from user
-      UserModel.findOne(
-        { email: req.cookies.username }, 
-        { name: 1, _id: 0 }
-      ),
-      // Add projection to only get needed product fields
-      // Product.find({}, { 
-      //   // Add fields you actually need in your template
-      //   name: 1, 
-      //   price: 1, 
-      //   description: 1,
-      //   // etc...
-      // })
-      Product.find()
+      UserModel.findOne({ email: req.cookies.username }, { name: 1, _id: 0 }),
+
+      Product.find(),
     ]);
 
     let username = req.cookies.username;
-    // var email = username;
-
-    // const user = await UserModel.findOne({ email });
-
-    // if (!user) {
-    //   return res.status(401).json({ message: "Invalid credentials" });
-    // }
 
     if (user) {
       var title = user.name;
@@ -87,8 +76,38 @@ app.get("/", async (req, res) => {
     res.status(500).render("error", {
       message: "Failed to load homepage",
       name: "",
-      login_status: "Login"
-     });
+      login_status: "Login",
+    });
+  }
+});
+
+app.post("/create-order", async (req, res) => {
+  const options = {
+    amount: req.body.amount * 100, //Amount in smallest currency unit ( e.g. paise for INR),
+    currency: "INR",
+    receipt: `order_${Date.now()}`,
+  };
+
+  try {
+    const order = await razorpay.orders.create(options);
+    res.json(order);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send(error);
+  }
+});
+
+app.post("/verify-payment", (req,res) => {
+  const signature = req.headers['x-razorpay-signature'];
+  const shasum = crypto.createHmac('sha256', process.env.RAZORPAY_KEY_SECRET);
+  shasum.update(JSON.stringify(req.body));
+  const digest = shasum.digest('hex');
+
+  if(signature === digest) {
+    res.json ( { status : 'Payment verified' });
+  }
+  else{
+    res.status(400).json( { status : "Payment verification failed"});
   }
 });
 
@@ -539,39 +558,6 @@ app.get("/api/cart", async (req, res) => {
       name: user.name,
       login_status: "",
     });
-
-    // if (user) {
-    //   var title = user.name;
-    //   var login_status = "";
-
-    //   var savedproducts = user.productArray;
-
-    //   var size = savedproducts.length;
-
-    //   var display = new Array();
-
-    //   for (let i = 0; i < size; i++) {
-    //     var _id = savedproducts[i];
-
-    //     const product = await Product.findOne({ _id });
-    //     display.push(product);
-    //   }
-
-    //   res.render("cart", {
-    //     display: display,
-    //     name: title,
-    //     login_status: login_status,
-    //   });
-
-    // } else {
-    //   var title = "";
-    //   var login_status = "";
-
-    //   res.render("login", {
-    //     name: title,
-    //     login_status: login_status,
-    //   });
-    // }
   } catch (error) {
     console.error("Cart error:", error);
     res.status(500).send("Error loading cart");
@@ -605,39 +591,6 @@ app.get("/cart", async (req, res) => {
       name: user.name,
       login_status: "",
     });
-
-    // if (user) {
-    //   var title = user.name;
-    //   var login_status = "";
-
-    //   var savedproducts = user.productArray;
-
-    //   var size = savedproducts.length;
-
-    //   var display = new Array();
-
-    //   for (let i = 0; i < size; i++) {
-    //     var _id = savedproducts[i];
-
-    //     const product = await Product.findOne({ _id });
-    //     display.push(product);
-    //   }
-
-    //   res.render("cart", {
-    //     display: display,
-    //     name: title,
-    //     login_status: login_status,
-    //   });
-
-    // } else {
-    //   var title = "";
-    //   var login_status = "";
-
-    //   res.render("login", {
-    //     name: title,
-    //     login_status: login_status,
-    //   });
-    // }
   } catch (error) {
     console.error("Cart error:", error);
     res.status(500).send("Error loading cart");

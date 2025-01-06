@@ -1,39 +1,56 @@
-<div class="welcome">
-  <%if(locals.username){%>
-  <p>You are logged in as <%=username%></p>
-  <a href="/logout">Logout</a>
-  <%} else { %>
-  <a href="/login">Login</a>
-  <% } %>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"
+    ></script>
 
-<h2><%= details[i].ProductName%></h2>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="CodeHim" />
 
-<img src="<%= details[i].ImageUrl %>" alt="image-url" />
-<p>₹<%= details[i].Price %></p>
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Shopping Cart</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <!-- Demo CSS (No need to include it into your project) -->
+  </head>
+  <body>
+   
+        <%- include('partials/header') %>
+      
 
+    <main style="padding-top: 120px;">
+      
 
-<% for (var i =0; i <(details.length); i++ ) { %>
+      <!-- <section class="product"> -->
+        <!-- <img src="product1.jpg" alt="Gift 1" /> -->
 
-<section class="product">
-  <!-- <img src="product1.jpg" alt="Gift 1" /> -->
+        <% display.forEach((item)=>{%>
 
-  <h2><%= details%></h2>
+          <% for (var i =0; i <1;  i++ ) { %>
 
-  <p><%= details.ProductName %></p>
-</section>
+            <section class="product">
+          <!-- <section class="product"></section> -->
+        <h2><%= item.ProductName %></h2>
+        <img src="<%= item.ImageUrl %>" alt="image-url" />
+        <p>₹<%= item.Price %></p>
 
-<%# will output the numbers 1-10 %> <% } %>
+      </section>
 
+        <% } %>
 
-<% for (var i =0; i <(display.length); i++ ) { %>
+        <%})%>
 
+      <!-- </section> -->
 
-    <% } %>
+        
+      <!-- </section> -->
 
+      
+    </main>
 
-
-    <%# comment in ejs %>
-    <% /* %>
-            <p><%= details[i].Desription %></p>
-            <% */ %>
+    <%- include('partials/footer') %>
+  </body>
+</html>

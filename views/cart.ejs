@@ -1,56 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"
-    ></script>
-
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="CodeHim" />
-
     <link rel="stylesheet" href="/styles.css" />
     <title>Shopping Cart</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-    <!-- Demo CSS (No need to include it into your project) -->
+    <style>
+      .product-card {
+        border: 1px solid #ddd;
+        padding: 15px;
+        margin: 10px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .product-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+      }
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .quantity-btn {
+        padding: 5px 10px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .remove-btn {
+        padding: 5px 10px;
+        background: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .cart-summary {
+        margin-top: 20px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+      }
+      .checkout-btn {
+        padding: 10px 20px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+    </style>
   </head>
   <body>
-   
-        <%- include('partials/header') %>
-      
+    <%- include('partials/header') %>
 
-    <main style="padding-top: 120px;">
-      
+    <main style="padding-top: 120px">
+      <div class="cart-container">
+        <% if (display && display.length > 0) { %> <% display.forEach((item) =>
+        { %>
+        <div
+          class="product-card"
+          data-id="<%= item.id %>"
+          data-price="<%= item.Price %>"
+        >
+          <img
+            src="<%= item.ImageUrl %>"
+            alt="<%= item.ProductName %>"
+            class="product-image"
+          />
+          <div class="product-details">
+            <h2><%= item.ProductName %></h2>
+            <p class="price">₹<%= item.Price %></p>
+            <div class="quantity-controls">
+              <button
+                class="quantity-btn minus"
+                onclick="updateQuantity('<%= item.id %>', -1)"
+              >
+                -
+              </button>
+              <span class="quantity">1</span>
+              <button
+                class="quantity-btn plus"
+                onclick="updateQuantity('<%= item.id %>', 1)"
+              >
+                +
+              </button>
+              <button class="remove-btn" onclick="removeItem('<%= item.id %>')">
+                Remove
+              </button>
+            </div>
+            <p class="item-total">Total: ₹<%= item.Price %></p>
+          </div>
+        </div>
+        <% }) %>
 
-      <!-- <section class="product"> -->
-        <!-- <img src="product1.jpg" alt="Gift 1" /> -->
-
-        <% display.forEach((item)=>{%>
-
-          <% for (var i =0; i <1;  i++ ) { %>
-
-            <section class="product">
-          <!-- <section class="product"></section> -->
-        <h2><%= item.ProductName %></h2>
-        <img src="<%= item.ImageUrl %>" alt="image-url" />
-        <p>₹<%= item.Price %></p>
-
-      </section>
-
+        <div class="cart-summary">
+          <h3>Cart Summary</h3>
+          <p>Total Items: <span id="total-items">0</span></p>
+          <p>Total Amount: ₹<span id="total-amount">0</span></p>
+          <button
+            class="checkout-btn"
+            id="rzp-button"
+            onclick="proceedToCheckout()"
+          >
+            Proceed to Checkout
+          </button>
+        </div>
+        <% } else { %>
+        <p>Your cart is empty</p>
         <% } %>
-
-        <%})%>
-
-      <!-- </section> -->
-
-        
-      <!-- </section> -->
-
-      
+      </div>
     </main>
 
     <%- include('partials/footer') %>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+      function updateQuantity(itemId, change) {
+        const productCard = document.querySelector(
+          `.product-card[data-id="${itemId}"]`
+        );
+        const quantityElement = productCard.querySelector(".quantity");
+        const itemTotalElement = productCard.querySelector(".item-total");
+        const price = parseFloat(productCard.dataset.price);
+
+        let quantity = parseInt(quantityElement.textContent);
+        quantity = Math.max(1, quantity + change);
+        quantityElement.textContent = quantity;
+
+        const itemTotal = price * quantity;
+        itemTotalElement.textContent = `Total: ₹${itemTotal}`;
+
+        updateCartSummary();
+      }
+
+      function removeItem(itemId) {
+        const productCard = document.querySelector(
+          `.product-card[data-id="${itemId}"]`
+        );
+        productCard.remove();
+        updateCartSummary();
+      }
+
+      function updateCartSummary() {
+        const productCards = document.querySelectorAll(".product-card");
+        let totalItems = 0;
+        let totalAmount = 0;
+
+        productCards.forEach((card) => {
+          const quantity = parseInt(
+            card.querySelector(".quantity").textContent
+          );
+          const price = parseFloat(card.dataset.price);
+          totalItems += quantity;
+          totalAmount += price * quantity;
+        });
+
+        document.getElementById("total-items").textContent = totalItems;
+        document.getElementById("total-amount").textContent =
+          totalAmount.toFixed(2);
+      }
+
+      document.addEventListener("DOMContentLoaded", updateCartSummary);
+      // Initialize cart summary on page load
+
+      async function proceedToCheckout() {
+        const totalAmount = parseFloat(
+          document.getElementById("total-amount").textContent
+        );
+
+        try {
+          const response = await fetch("/create-order", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ amount: totalAmount }),
+          });
+
+          const order = await response.json();
+
+          const options = {
+            key: "rzp_test_eJh9smTqP5g7gp",
+            amount: order.amount,
+            currency: "INR",
+            name: "Gift Wala",
+            description: "Cart-Purchase",
+            order_id: order.id,
+            handler: async function (response) {
+              try {
+                const verifyResponse = await fetch("/verify-payment", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                    "x-razorpay-signature": response.razorpay_signature,
+                  },
+                  body: JSON.stringify(response),
+                });
+
+                const verification = await verifyResponse.json();
+                if (verification.status === "Payment verified") {
+                  window.location.href = "/order-success";
+                }
+              } catch (error) {
+                alert("Payment verification failed");
+              }
+            },
+
+            prefill: {
+              name: "",
+              email: "",
+              contact: "",
+            },
+            theme: {
+              color: "#28a745",
+            },
+          };
+          const rzp = new Razorpay(options);
+          rzp.open();
+        } catch (error) {
+          alert("Unable to create order");
+          console.log(error);
+        }
+      }
+    </script>
   </body>
 </html>
