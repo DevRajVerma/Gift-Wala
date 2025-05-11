@@ -1,58 +1,221 @@
-
-
-<!-- ... (remaining HTML code) ... -->
-
 <div class="header sticky" id="myHeader">
   <div class="main-header">
     <div class="top-header">
       <div class="logo-name">
         <a href="/">
-          <img src="/images/logo.png" alt="Gift Shop Logo" />
+          <img src="/images/logo.png" alt="Gift Wala" />
         </a>
-    
         <a href="/" style="text-decoration: none">
-          <p style="color: white; margin: 0">Gift Wala</p>
+          <p>Gift Wala</p>
         </a>
       </div>
       <div class="top-icons">
-      
-        <h3
-          contenteditable="true"
-          style="
-            font-family: sans-serif;
-            text-align: center;
-            color: rgb(255, 255, 255);
-          "
-        > 
-          <%= name %>
-        </h3>
-    
+        <h3 contenteditable="true"><%= name %></h3>
         <a href="cart"><button class="cart-button">Cart</button></a>
-        <a href="login"
-          ><button class="login-button"><%= login_status %></button></a
-        >
-        <!-- <a href="profile"><button class="profile-button">Profile</button></a> -->
-    
+        
+        
+        
         <div class="menu-dropdown">
           <button class="menu-button">
-            <img
-              style="width: 12.734px; height: 25px"
-              src="/images/kebab-menu.png"
-              alt="kebab-menu"
-            />
-            <!-- <img src="kebab.png" alt="menu" style="max-width: 10%;  
-                      height: auto;  "> -->
+            <img src="/images/kebab-menu.png" alt="Menu" />
           </button>
-    
           <div class="dropdown-content">
-            <!-- <a href="/">Home</a> -->
-            <!-- <a href="#">Products</a> -->
-            <!-- <a href="contact">Contact</a> -->
-            <!-- <a href="add_products">Add to Products</a> -->
-            <!-- <a href="products">Products</a> -->
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+            <a href="/logout">Logout</a>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  /* Header Styles */
+  .header {
+    background: linear-gradient(to right, #555, #777);
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    animation: slideDown 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+
+  .main-header {
+    width: 100%;
+  }
+
+  .top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+  }
+
+  .logo-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-name img {
+    height: 35px;
+    width: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .logo-name img:hover {
+    transform: scale(1.05);
+  }
+
+  .logo-name p {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: white;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .top-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .top-icons h3 {
+    font-family: sans-serif;
+    text-align: center;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0 5px;
+  }
+
+  .cart-button, .login-button {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .cart-button:hover, .login-button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+  }
+
+  .menu-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .menu-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.2s ease;
+  }
+
+  .menu-button:hover {
+    transform: rotate(90deg);
+  }
+
+  .menu-button img {
+    width: 12.734px;
+    height: 25px;
+    filter: brightness(1.2);
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    z-index: 1;
+    overflow: hidden;
+    transform-origin: top right;
+  }
+
+  .dropdown-content a {
+    color: #444;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #f5f5f5;
+    color: #cf268a;
+    padding-left: 20px;
+  }
+
+  .menu-dropdown:hover .dropdown-content {
+    display: block;
+    animation: scaleIn 0.2s ease;
+  }
+
+  @keyframes scaleIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .top-icons {
+      gap: 10px;
+    }
+    
+    .top-icons h3 {
+      max-width: 100px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .top-header {
+      padding: 10px 15px;
+    }
+    
+    .logo-name img {
+      height: 30px;
+    }
+    
+    .logo-name p {
+      font-size: 1.2rem;
+    }
+    
+    .cart-button, .login-button {
+      padding: 6px 12px;
+      font-size: 0.8rem;
+    }
+    
+    .top-icons h3 {
+      font-size: 0.85rem;
+      max-width: 80px;
+    }
+  }
+</style>

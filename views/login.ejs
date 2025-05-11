@@ -2,109 +2,323 @@
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"
-    ></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EDHWHQ1H31"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-EDHWHQ1H31");
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-EDHWHQ1H31');
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/styles.css" />
-    <title>Login</title>
+    <title>Login - Gift Wala</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f7f7f7;
+      :root {
+        --primary: #e83e8c;
+        --primary-dark: #d5267a;
+        --secondary: #6c757d;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        --success: #28a745;
+        --danger: #dc3545;
+        --warning: #ffc107;
+        --info: #17a2b8;
+        --white: #ffffff;
+        --gray-100: #f8f9fa;
+        --gray-200: #e9ecef;
+        --gray-300: #dee2e6;
+        --gray-400: #ced4da;
+        --gray-500: #adb5bd;
+        --gray-600: #6c757d;
+        --gray-700: #495057;
+        --gray-800: #343a40;
+        --gray-900: #212529;
+        --font-family: 'Poppins', sans-serif;
       }
 
-      .container {
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: var(--font-family);
+        background-color: var(--gray-100);
+        color: var(--gray-800);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .login-page {
+        flex: 1;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        padding: 2rem;
       }
 
       .login-container {
-        background-color: #ffffff;
-        border-radius: 1rem;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem;
-        max-width: 25rem;
+        background-color: var(--white);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
         width: 100%;
+        max-width: 900px;
       }
 
-      .login-image img {
-        width: 5rem;
-        height: 5rem;
+      .login-image {
+        flex: 1;
+        background-image: url('/placeholder.svg?height=600&width=400');
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2rem;
+        position: relative;
+      }
+
+      .login-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1));
+      }
+
+      .login-image-content {
+        position: relative;
+        z-index: 1;
+        color: var(--white);
+      }
+
+      .login-image-content h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .login-image-content p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .login-form-container {
+        flex: 1;
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         margin-bottom: 2rem;
+      }
+
+      .login-logo img {
+        height: 40px;
+        width: auto;
+      }
+
+      .login-logo p {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
       }
 
       .login-form h1 {
-        margin-bottom: 2rem;
-        color: #333;
-        font-size: 1.5rem;
+        font-size: 1.8rem;
+        color: var(--gray-800);
+        margin-bottom: 0.5rem;
+        font-weight: 600;
       }
 
-      .login-form input {
-        width: 80%;
-        padding: 1rem;
+      .login-form p {
+        color: var(--gray-600);
         margin-bottom: 2rem;
-        border: 1px solid #ccc;
-        border-radius: 0.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--gray-700);
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--gray-300);
+        border-radius: 8px;
         font-size: 1rem;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
       }
 
-      .login-form button {
-        background-color: #cf268a;
-        color: #fff;
+      .form-group input:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(232, 62, 140, 0.1);
+        outline: none;
+      }
+
+      .forgot-password {
+        text-align: right;
+        margin-bottom: 1.5rem;
+      }
+
+      .forgot-password a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.2s ease;
+      }
+
+      .forgot-password a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .login-button {
+        background-color: var(--primary);
+        color: var(--white);
         border: none;
-        border-radius: 0.5rem;
-        padding: 1rem 2rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
         font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        width: 100%;
+        transition: background-color 0.3s ease, transform 0.2s ease;
       }
 
-      .login-form button:hover {
-        background-color: #6b0772;
+      .login-button:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+      }
+
+      .login-button:active {
+        transform: translateY(0);
       }
 
       .signup-link {
-        margin-top: 1.5rem;
-        color: #666;
-        font-size: 0.8rem;
+        text-align: center;
+        margin-top: 2rem;
+        color: var(--gray-600);
+        font-size: 0.9rem;
       }
 
       .signup-link a {
-        color: #cf268a;
+        color: var(--primary);
         text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
       }
 
-      @media (max-width: 600px) {
-        .login-form input {
-          margin-bottom: 1.5rem;
+      .signup-link a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .social-login {
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .social-login p {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      .social-login p::before,
+      .social-login p::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 40%;
+        height: 1px;
+        background-color: var(--gray-300);
+      }
+
+      .social-login p::before {
+        left: 0;
+      }
+
+      .social-login p::after {
+        right: 0;
+      }
+
+      .social-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .social-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--white);
+        border: 1px solid var(--gray-300);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .social-button:hover {
+        background-color: var(--gray-100);
+        transform: translateY(-2px);
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .login-container {
+          flex-direction: column;
+          max-width: 500px;
         }
 
-        .login-form button {
-          padding: 0.8rem 1.5rem;
+        .login-image {
+          display: none;
         }
 
-        .signup-link {
-          font-size: 0.6rem;
+        .login-form-container {
+          padding: 2rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .login-form-container {
+          padding: 1.5rem;
+        }
+
+        .login-form h1 {
+          font-size: 1.5rem;
+        }
+
+        .form-group {
+          margin-bottom: 1rem;
+        }
+
+        .form-group input {
+          padding: 0.6rem 0.8rem;
         }
       }
     </style>
@@ -112,25 +326,87 @@
   <body>
     <header><%- include('partials/header') %></header>
 
-    <div class="container">
+    <div class="login-page">
       <div class="login-container">
-        <form class="login-form" action="/api/login" method="POST">
-          <h1>Welcome Back</h1>
-          <input type="email" placeholder="email" name="email" required />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            required
-          />
-          <button type="submit">Login</button>
-          <p class="signup-link">
-            Don't have an account? <a href="signup">Sign up</a>
-          </p>
-        </form>
+        <div class="login-image">
+          <div class="login-image-content">
+            <h2>Welcome to Gift Wala</h2>
+            <p>Find the perfect gift for every occasion and make your loved ones smile.</p>
+          </div>
+        </div>
+        <div class="login-form-container">
+          <div class="login-logo">
+            <img src="/images/logo.png" alt="Gift Wala Logo" />
+            <p>Gift Wala</p>
+          </div>
+          <form class="login-form" action="/api/login" method="POST">
+            <h1>Welcome Back</h1>
+            <p>Please sign in to continue</p>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Enter your email" name="email" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Enter your password" name="password" required />
+            </div>
+            
+            <div class="forgot-password">
+              <a href="/forgot-password">Forgot password?</a>
+            </div>
+            
+            <button type="submit" class="login-button">Sign In</button>
+            
+            <div class="signup-link">
+              Don't have an account? <a href="signup">Sign up</a>
+            </div>
+            
+            <div class="social-login">
+              <p>Or continue with</p>
+              <div class="social-buttons">
+                <button type="button" class="social-button">G</button>
+                <button type="button" class="social-button">f</button>
+                <button type="button" class="social-button">in</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
 
     <%- include('partials/footer') %>
+
+    <script>
+      // Form validation
+      const loginForm = document.querySelector('.login-form');
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+
+      loginForm.addEventListener('submit', function(e) {
+        let isValid = true;
+        
+        // Simple email validation
+        if (!emailInput.value.includes('@')) {
+          emailInput.style.borderColor = 'var(--danger)';
+          isValid = false;
+        } else {
+          emailInput.style.borderColor = 'var(--gray-300)';
+        }
+        
+        // Password validation (at least 6 characters)
+        if (passwordInput.value.length < 6) {
+          passwordInput.style.borderColor = 'var(--danger)';
+          isValid = false;
+        } else {
+          passwordInput.style.borderColor = 'var(--gray-300)';
+        }
+        
+        if (!isValid) {
+          e.preventDefault();
+        }
+      });
+    </script>
   </body>
 </html>

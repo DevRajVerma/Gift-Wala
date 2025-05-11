@@ -20,130 +20,449 @@
     <link rel="stylesheet" href="/styles.css" />
     <title>Sign Up</title>
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
     <style>
+      :root {
+        --primary-color: #cf268a;
+        --primary-hover: #b01e75;
+        --primary-dark: #6b0772;
+        --secondary-color: #4a90e2;
+        --text-color: #333;
+        --text-light: #666;
+        --background: #f7f7f7;
+        --white: #ffffff;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --border-radius: 1rem;
+        --input-border: #e0e0e0;
+        --input-focus: #cf268a;
+        --transition: all 0.3s ease;
+      }
+
       body {
         margin: 0;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f7f7f7;
+        background-color: var(--background);
+        color: var(--text-color);
+        /* Fix for header overlap */
+        padding-top: 80px; /* Adjust based on your header height */
       }
 
       .container {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: calc(100vh - 80px); /* Adjust for header height */
+        padding: 2rem 1rem;
       }
 
       .signup-container {
-        background-color: #ffffff;
-        border-radius: 1rem;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem;
-        max-width: 25rem;
+        background-color: var(--white);
+        border-radius: var(--border-radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
         width: 100%;
+        max-width: 450px;
+        position: relative;
+        animation: fadeIn 0.5s ease-out;
       }
 
-      .signup-image img {
-        width: 5rem;
-        height: 5rem;
-        margin-bottom: 2rem;
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
       }
 
-      .signup-form h1 {
-        margin-bottom: 2rem;
-        color: #333;
-        font-size: 1.5rem;
+      .signup-header {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: var(--white);
+        padding: 2rem;
+        text-align: center;
+        position: relative;
       }
 
-      .signup-form input {
-        width: 80%;
-        padding: 1rem;
-        margin-bottom: 2rem;
-        border: 1px solid #ccc;
+      .signup-header h1 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+
+      .signup-header p {
+        margin: 0.5rem 0 0;
+        opacity: 0.9;
+        font-size: 0.9rem;
+      }
+
+      .signup-form {
+        padding: 2rem;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--text-light);
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 0.8rem 1rem 0.8rem 2.5rem;
+        border: 1px solid var(--input-border);
         border-radius: 0.5rem;
         font-size: 1rem;
+        transition: var(--transition);
+        box-sizing: border-box;
       }
 
-      .signup-form button {
-        background-color: #cf268a;
-        color: #fff;
+      .form-group input:focus {
+        outline: none;
+        border-color: var(--input-focus);
+        box-shadow: 0 0 0 3px rgba(207, 38, 138, 0.1);
+      }
+
+      .form-group i {
+        position: absolute;
+        left: 1rem;
+        top: 2.3rem;
+        color: var(--text-light);
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 1rem;
+        top: 2.3rem;
+        color: var(--text-light);
+        cursor: pointer;
+      }
+
+      .btn-signup {
+        width: 100%;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: var(--white);
         border: none;
         border-radius: 0.5rem;
-        padding: 1rem 2rem;
-        cursor: pointer;
-        transition: background-color 0.3s;
+        padding: 1rem;
         font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        margin-top: 1rem;
       }
 
-      .signup-form button:hover {
-        background-color: #6b0772;
+      .btn-signup:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(207, 38, 138, 0.3);
+      }
+
+      .btn-signup:active {
+        transform: translateY(0);
       }
 
       .login-link {
+        text-align: center;
         margin-top: 1.5rem;
-        color: #666;
-        font-size: 0.8rem;
+        color: var(--text-light);
+        font-size: 0.9rem;
       }
 
       .login-link a {
-        color: #cf268a;
+        color: var(--primary-color);
         text-decoration: none;
+        font-weight: 600;
+        transition: var(--transition);
       }
 
+      .login-link a:hover {
+        color: var(--primary-dark);
+        text-decoration: underline;
+      }
+
+      .social-signup {
+        margin-top: 2rem;
+        text-align: center;
+      }
+
+      .social-signup p {
+        position: relative;
+        margin-bottom: 1.5rem;
+        color: var(--text-light);
+      }
+
+      .social-signup p::before,
+      .social-signup p::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 30%;
+        height: 1px;
+        background-color: var(--input-border);
+      }
+
+      .social-signup p::before {
+        left: 0;
+      }
+
+      .social-signup p::after {
+        right: 0;
+      }
+
+      .social-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background-color: var(--white);
+        border: 1px solid var(--input-border);
+        color: var(--text-color);
+        font-size: 1.2rem;
+        transition: var(--transition);
+      }
+
+      .social-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .social-btn.google:hover {
+        color: #DB4437;
+        border-color: #DB4437;
+      }
+
+      .social-btn.facebook:hover {
+        color: #4267B2;
+        border-color: #4267B2;
+      }
+
+      .social-btn.twitter:hover {
+        color: #1DA1F2;
+        border-color: #1DA1F2;
+      }
+
+      /* Password strength indicator */
+      .password-strength {
+        height: 5px;
+        margin-top: 0.5rem;
+        border-radius: 5px;
+        background-color: #e0e0e0;
+        overflow: hidden;
+      }
+
+      .password-strength-meter {
+        height: 100%;
+        width: 0;
+        transition: var(--transition);
+      }
+
+      .weak {
+        width: 33%;
+        background-color: #ff4d4d;
+      }
+
+      .medium {
+        width: 66%;
+        background-color: #ffd700;
+      }
+
+      .strong {
+        width: 100%;
+        background-color: #00cc44;
+      }
+
+      /* Responsive adjustments */
       @media (max-width: 600px) {
-        .signup-form input {
-          margin-bottom: 1.5rem;
+        .container {
+          padding: 1rem;
         }
 
-        .signup-form button {
-          padding: 0.8rem 1.5rem;
+        .signup-header {
+          padding: 1.5rem;
         }
 
-        .login-link {
-          font-size: 0.6rem;
+        .signup-form {
+          padding: 1.5rem;
+        }
+
+        .form-group {
+          margin-bottom: 1rem;
+        }
+
+        .social-signup p::before,
+        .social-signup p::after {
+          width: 25%;
+        }
+      }
+
+      /* Animation for form elements */
+      .form-group {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.5s forwards;
+      }
+
+      .form-group:nth-child(1) { animation-delay: 0.1s; }
+      .form-group:nth-child(2) { animation-delay: 0.2s; }
+      .form-group:nth-child(3) { animation-delay: 0.3s; }
+      .form-group:nth-child(4) { animation-delay: 0.4s; }
+
+      .btn-signup {
+        opacity: 0;
+        transform: translateY(10px);
+        animation: fadeInUp 0.5s 0.5s forwards;
+      }
+
+      .login-link, .social-signup {
+        opacity: 0;
+        animation: fadeInUp 0.5s 0.6s forwards;
+      }
+
+      @keyframes fadeInUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
       }
     </style>
   </head>
   <body>
-
     <header>
       <%- include('partials/header') %>
     </header>
-    
 
     <div class="container">
       <div class="signup-container">
+        <div class="signup-header">
+          <h1>Create Your Account</h1>
+          <p>Join our community and start your journey</p>
+        </div>
+        
         <form class="signup-form" action="/api/signup" method="POST">
-          <h1>Create an Account</h1>
-          <input type="text" placeholder="Full Name" name="name" required />
-          <input type="email" placeholder="Email" name="email" required />
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            required
-          />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            name="password2"
-            required
-          />
-          <button type="submit" name="signup_submit" value="Sign me up">
-            Sign Up
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <i class="fas fa-user"></i>
+            <input type="text" id="name" placeholder="Enter your full name" name="name" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" placeholder="Enter your email" name="email" required />
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="Create a password" name="password" required />
+            <i class="fas fa-eye password-toggle" id="togglePassword"></i>
+            <div class="password-strength">
+              <div class="password-strength-meter" id="passwordStrength"></div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="password2">Confirm Password</label>
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password2" placeholder="Confirm your password" name="password2" required />
+            <i class="fas fa-eye password-toggle" id="togglePassword2"></i>
+          </div>
+          
+          <button type="submit" class="btn-signup" name="signup_submit" value="Sign me up">
+            Create Account
           </button>
+          
           <p class="login-link">
             Already have an account? <a href="login">Log in</a>
           </p>
+          
+          <div class="social-signup">
+            <p>Or sign up with</p>
+            <div class="social-buttons">
+              <a href="#" class="social-btn google"><i class="fab fa-google"></i></a>
+              <a href="#" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="social-btn twitter"><i class="fab fa-twitter"></i></a>
+            </div>
+          </div>
         </form>
       </div>
     </div>
 
     <%- include('partials/footer') %>
+
+    <script>
+      // Toggle password visibility
+      document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+      });
+
+      document.getElementById('togglePassword2').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password2');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+      });
+
+      // Password strength meter
+      document.getElementById('password').addEventListener('input', function() {
+        const password = this.value;
+        const strengthMeter = document.getElementById('passwordStrength');
+        
+        // Remove existing classes
+        strengthMeter.classList.remove('weak', 'medium', 'strong');
+        
+        if (password.length === 0) {
+          strengthMeter.style.width = '0';
+          return;
+        }
+        
+        // Simple password strength check
+        let strength = 0;
+        
+        // Length check
+        if (password.length >= 8) strength += 1;
+        
+        // Complexity check
+        if (/[A-Z]/.test(password) && /[a-z]/.test(password)) strength += 1;
+        if (/[0-9]/.test(password)) strength += 1;
+        if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+        
+        // Set the appropriate class
+        if (strength <= 2) {
+          strengthMeter.classList.add('weak');
+        } else if (strength <= 3) {
+          strengthMeter.classList.add('medium');
+        } else {
+          strengthMeter.classList.add('strong');
+        }
+      });
+
+      // Check if passwords match
+      document.getElementById('password2').addEventListener('input', function() {
+        const password = document.getElementById('password').value;
+        const confirmPassword = this.value;
+        
+        if (confirmPassword === password) {
+          this.style.borderColor = '#00cc44';
+        } else {
+          this.style.borderColor = '#ff4d4d';
+        }
+      });
+    </script>
   </body>
 </html>

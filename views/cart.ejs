@@ -3,59 +3,314 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="author" content="CodeHim" />
+    <meta name="author" content="Gift Wala" />
     <link rel="stylesheet" href="/styles.css" />
-    <title>Shopping Cart</title>
+    <title>Shopping Cart - Gift Wala</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-      .product-card {
-        border: 1px solid #ddd;
-        padding: 15px;
-        margin: 10px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        gap: 20px;
+      :root {
+        --primary: #cf268a;
+        --primary-light: #e83e8c;
+        --secondary: #6c757d;
+        --light: #f8f9fa;
+        --dark: #343a40;
+        --success: #28a745;
+        --danger: #dc3545;
+        --warning: #ffc107;
+        --info: #17a2b8;
+        --white: #ffffff;
+        --gray-100: #f8f9fa;
+        --gray-200: #e9ecef;
+        --gray-300: #dee2e6;
+        --gray-400: #ced4da;
+        --gray-500: #adb5bd;
+        --gray-600: #6c757d;
+        --gray-700: #495057;
+        --gray-800: #343a40;
+        --gray-900: #212529;
       }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--gray-100);
+        color: var(--gray-800);
+        line-height: 1.6;
+      }
+
+      .cart-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .cart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .cart-header h1 {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin: 0;
+      }
+
+      .continue-shopping {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--gray-700);
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
+      }
+
+      .continue-shopping:hover {
+        color: var(--gray-900);
+      }
+
+      .continue-shopping svg {
+        width: 16px;
+        height: 16px;
+      }
+
+      .product-card {
+        background-color: var(--white);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+        display: flex;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      }
+
       .product-image {
-        width: 100px;
-        height: 100px;
+        width: 120px;
+        height: 120px;
         object-fit: cover;
       }
+
+      .product-details {
+        flex: 1;
+        padding: 15px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .product-details h2 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin: 0 0 5px;
+      }
+
+      .price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--gray-700);
+        margin: 0 0 15px;
+      }
+
       .quantity-controls {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 15px;
+        margin-bottom: 10px;
       }
+
       .quantity-btn {
-        padding: 5px 10px;
-        background: #007bff;
-        color: white;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--gray-200);
+        color: var(--gray-800);
         border: none;
-        border-radius: 4px;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        font-weight: 600;
         cursor: pointer;
+        transition: all 0.2s ease;
       }
+
+      .quantity-btn:hover {
+        background-color: var(--gray-300);
+      }
+
+      .quantity {
+        font-size: 1rem;
+        font-weight: 500;
+        min-width: 30px;
+        text-align: center;
+      }
+
       .remove-btn {
-        padding: 5px 10px;
-        background: #dc3545;
-        color: white;
+        background-color: var(--gray-200);
+        color: var(--gray-700);
         border: none;
         border-radius: 4px;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+        font-weight: 500;
         cursor: pointer;
+        transition: all 0.2s ease;
       }
+
+      .remove-btn:hover {
+        background-color: var(--danger);
+        color: var(--white);
+      }
+
+      .item-total {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin: 10px 0 0;
+        text-align: right;
+      }
+
       .cart-summary {
-        margin-top: 20px;
-        padding: 20px;
-        background: #f8f9fa;
-        border-radius: 8px;
+        background-color: var(--white);
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-top: 30px;
       }
+
+      .cart-summary h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: var(--gray-800);
+        margin: 0 0 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--gray-200);
+      }
+
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+
+      .summary-row p {
+        font-size: 1rem;
+        color: var(--gray-700);
+        margin: 0;
+      }
+
+      .summary-row.total {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid var(--gray-200);
+      }
+
+      .summary-row.total p {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--gray-800);
+      }
+
       .checkout-btn {
-        padding: 10px 20px;
-        background: #28a745;
-        color: white;
+        background-color: var(--gray-700);
+        color: var(--white);
         border: none;
-        border-radius: 4px;
+        border-radius: 6px;
+        padding: 12px 0;
+        font-size: 1rem;
+        font-weight: 500;
         cursor: pointer;
-        font-size: 16px;
+        width: 100%;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .checkout-btn:hover {
+        background-color: var(--gray-800);
+        transform: translateY(-2px);
+      }
+
+      .empty-cart {
+        text-align: center;
+        padding: 60px 20px;
+      }
+
+      .empty-cart h2 {
+        font-size: 1.5rem;
+        color: var(--gray-700);
+        margin-bottom: 15px;
+      }
+
+      .empty-cart p {
+        color: var(--gray-600);
+        margin-bottom: 30px;
+      }
+
+      .shop-now-btn {
+        display: inline-block;
+        background-color: var(--gray-700);
+        color: var(--white);
+        text-decoration: none;
+        padding: 10px 25px;
+        border-radius: 6px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .shop-now-btn:hover {
+        background-color: var(--gray-800);
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 768px) {
+        .product-card {
+          flex-direction: column;
+        }
+        
+        .product-image {
+          width: 100%;
+          height: 200px;
+        }
+        
+        .product-details {
+          padding: 15px;
+        }
+        
+        .quantity-controls {
+          flex-wrap: wrap;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .cart-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        
+        .product-details h2 {
+          font-size: 1.1rem;
+        }
+        
+        .price {
+          font-size: 1rem;
+        }
+        
+        .cart-summary {
+          padding: 20px;
+        }
       }
     </style>
   </head>
@@ -64,58 +319,66 @@
 
     <main style="padding-top: 120px">
       <div class="cart-container">
-        <% if (display && display.length > 0) { %> <% display.forEach((item) =>
-        { %>
-        <div
-          class="product-card"
-          data-id="<%= item.id %>"
-          data-price="<%= item.Price %>"
-        >
-          <img
-            src="<%= item.ImageUrl %>"
-            alt="<%= item.ProductName %>"
-            class="product-image"
-          />
-          <div class="product-details">
-            <h2><%= item.ProductName %></h2>
-            <p class="price">₹<%= item.Price %></p>
-            <div class="quantity-controls">
-              <button
-                class="quantity-btn minus"
-                onclick="updateQuantity('<%= item.id %>', -1)"
-              >
-                -
-              </button>
-              <span class="quantity">1</span>
-              <button
-                class="quantity-btn plus"
-                onclick="updateQuantity('<%= item.id %>', 1)"
-              >
-                +
-              </button>
-              <button class="remove-btn" onclick="removeItem('<%= item.id %>')">
-                Remove
-              </button>
+        <div class="cart-header">
+          <h1>Your Shopping Cart</h1>
+          <a href="/" class="continue-shopping">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Continue Shopping
+          </a>
+        </div>
+        
+        <% if (display && display.length > 0) { %>
+          <% display.forEach((item) => { %>
+            <div class="product-card" data-id="<%= item.id %>" data-price="<%= item.Price %>">
+              <img src="<%= item.ImageUrl %>" alt="<%= item.ProductName %>" class="product-image" />
+              <div class="product-details">
+                <div>
+                  <h2><%= item.ProductName %></h2>
+                  <p class="price">₹<%= item.Price %></p>
+                </div>
+                <div>
+                  <div class="quantity-controls">
+                    <button class="quantity-btn minus" onclick="updateQuantity('<%= item.id %>', -1)">-</button>
+                    <span class="quantity">1</span>
+                    <button class="quantity-btn plus" onclick="updateQuantity('<%= item.id %>', 1)">+</button>
+                    <button class="remove-btn" onclick="removeItem('<%= item.id %>')">Remove</button>
+                  </div>
+                  <p class="item-total">Total: ₹<%= item.Price %></p>
+                </div>
+              </div>
             </div>
-            <p class="item-total">Total: ₹<%= item.Price %></p>
-          </div>
-        </div>
-        <% }) %>
+          <% }) %>
 
-        <div class="cart-summary">
-          <h3>Cart Summary</h3>
-          <p>Total Items: <span id="total-items">0</span></p>
-          <p>Total Amount: ₹<span id="total-amount">0</span></p>
-          <button
-            class="checkout-btn"
-            id="rzp-button"
-            onclick="proceedToCheckout()"
-          >
-            Proceed to Checkout
-          </button>
-        </div>
+          <div class="cart-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-row">
+              <p>Subtotal</p>
+              <p>₹<span id="subtotal">0.00</span></p>
+            </div>
+            <div class="summary-row">
+              <p>Shipping</p>
+              <p>₹<span id="shipping">0.00</span></p>
+            </div>
+            <div class="summary-row">
+              <p>Tax</p>
+              <p>₹<span id="tax">0.00</span></p>
+            </div>
+            <div class="summary-row total">
+              <p>Total</p>
+              <p>₹<span id="total-amount">0.00</span></p>
+            </div>
+            <button class="checkout-btn" id="rzp-button" onclick="proceedToCheckout()">
+              Proceed to Checkout
+            </button>
+          </div>
         <% } else { %>
-        <p>Your cart is empty</p>
+          <div class="empty-cart">
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added anything to your cart yet.</p>
+            <a href="/" class="shop-now-btn">Shop Now</a>
+          </div>
         <% } %>
       </div>
     </main>
@@ -124,10 +387,13 @@
 
     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
+      // Tax and shipping rates
+      const TAX_RATE = 0.10; // 5%
+      const SHIPPING_RATE = 50; // ₹50 flat rate
+      const FREE_SHIPPING_THRESHOLD = 500; // Free shipping for orders over ₹500
+      
       function updateQuantity(itemId, change) {
-        const productCard = document.querySelector(
-          `.product-card[data-id="${itemId}"]`
-        );
+        const productCard = document.querySelector(`.product-card[data-id="${itemId}"]`);
         const quantityElement = productCard.querySelector(".quantity");
         const itemTotalElement = productCard.querySelector(".item-total");
         const price = parseFloat(productCard.dataset.price);
@@ -137,45 +403,64 @@
         quantityElement.textContent = quantity;
 
         const itemTotal = price * quantity;
-        itemTotalElement.textContent = `Total: ₹${itemTotal}`;
+        itemTotalElement.textContent = `Total: ₹${itemTotal.toFixed(2)}`;
 
         updateCartSummary();
+        
+        // Add animation effect
+        productCard.style.transition = "background-color 0.3s ease";
+        productCard.style.backgroundColor = "#f8f9fa";
+        setTimeout(() => {
+          productCard.style.backgroundColor = "#ffffff";
+        }, 300);
       }
 
       function removeItem(itemId) {
-        const productCard = document.querySelector(
-          `.product-card[data-id="${itemId}"]`
-        );
-        productCard.remove();
-        updateCartSummary();
+        const productCard = document.querySelector(`.product-card[data-id="${itemId}"]`);
+        
+        // Add fade-out animation
+        productCard.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+        productCard.style.opacity = "0";
+        productCard.style.transform = "translateX(20px)";
+        
+        setTimeout(() => {
+          productCard.remove();
+          updateCartSummary();
+          
+          // Check if cart is empty after removal
+          const remainingItems = document.querySelectorAll(".product-card");
+          if (remainingItems.length === 0) {
+            location.reload(); // Reload to show empty cart message
+          }
+        }, 300);
       }
 
       function updateCartSummary() {
         const productCards = document.querySelectorAll(".product-card");
-        let totalItems = 0;
-        let totalAmount = 0;
+        let subtotal = 0;
 
         productCards.forEach((card) => {
-          const quantity = parseInt(
-            card.querySelector(".quantity").textContent
-          );
+          const quantity = parseInt(card.querySelector(".quantity").textContent);
           const price = parseFloat(card.dataset.price);
-          totalItems += quantity;
-          totalAmount += price * quantity;
+          subtotal += price * quantity;
         });
-
-        document.getElementById("total-items").textContent = totalItems;
-        document.getElementById("total-amount").textContent =
-          totalAmount.toFixed(2);
+        
+        // Calculate tax and shipping
+        const tax = subtotal * TAX_RATE;
+        const shipping = subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_RATE;
+        const total = subtotal + tax + shipping;
+        
+        // Update summary display
+        document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+        document.getElementById("tax").textContent = tax.toFixed(2);
+        document.getElementById("shipping").textContent = shipping.toFixed(2);
+        document.getElementById("total-amount").textContent = total.toFixed(0);
       }
 
       document.addEventListener("DOMContentLoaded", updateCartSummary);
-      // Initialize cart summary on page load
 
       async function proceedToCheckout() {
-        const totalAmount = parseFloat(
-          document.getElementById("total-amount").textContent
-        );
+        const totalAmount = parseFloat(document.getElementById("total-amount").textContent) ; // Convert to paise
 
         try {
           const response = await fetch("/create-order", {
@@ -193,10 +478,14 @@
             amount: order.amount,
             currency: "INR",
             name: "Gift Wala",
-            description: "Cart-Purchase",
+            description: "Purchase from Gift Wala",
             order_id: order.id,
             handler: async function (response) {
               try {
+                // Show processing indicator
+                document.getElementById("rzp-button").textContent = "Processing...";
+                document.getElementById("rzp-button").disabled = true;
+                
                 const verifyResponse = await fetch("/verify-payment", {
                   method: "POST",
                   headers: {
@@ -212,16 +501,17 @@
                 }
               } catch (error) {
                 alert("Payment verification failed");
+                document.getElementById("rzp-button").textContent = "Proceed to Checkout";
+                document.getElementById("rzp-button").disabled = false;
               }
             },
-
             prefill: {
               name: "",
               email: "",
               contact: "",
             },
             theme: {
-              color: "#28a745",
+              color: "#6c757d",
             },
           };
           const rzp = new Razorpay(options);
